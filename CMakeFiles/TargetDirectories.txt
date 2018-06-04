@@ -1,0 +1,3 @@
+/home/hyreos/Documentos/projects/Iona-1/Iona-1/CMakeFiles/rebuild_cache.dir
+/home/hyreos/Documentos/projects/Iona-1/Iona-1/CMakeFiles/iona.dir
+/home/hyreos/Documentos/projects/Iona-1/Iona-1/CMakeFiles/edit_cache.dir
