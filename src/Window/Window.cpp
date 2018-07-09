@@ -6,9 +6,9 @@
 #include <algorithm>
 
 namespace iona {
-	Window::Window(uSize_t size, const std::string_view title) {
+	Window::Window(SizeUint size, const std::string_view title) {
 		glfwWindowHint(GLFW_CLIENT_API, GLFW_NO_API);
-		m_pWindow = glfwCreateWindow(size.w(), size.h(), title.data(), nullptr, nullptr);
+		m_pWindow = glfwCreateWindow(size.w, size.h, title.data(), nullptr, nullptr);
 
 		assert(glfwCreateWindowSurface(priv::VKInfo::instance, m_pWindow, nullptr, reinterpret_cast<VkSurfaceKHR*>(&m_surface)) == static_cast<VkResult>(vk::Result::eSuccess));
 
@@ -35,11 +35,9 @@ namespace iona {
 		}
 
 		m_swapChainExtent = vk::Extent2D(
-				std::clamp(size.w(), details.capabilities.minImageExtent.width, details.capabilities.maxImageExtent.width),
-				std::clamp(size.h(), details.capabilities.minImageExtent.height, details.capabilities.maxImageExtent.height)
+				std::clamp(size.w, details.capabilities.minImageExtent.width, details.capabilities.maxImageExtent.width),
+				std::clamp(size.h, details.capabilities.minImageExtent.height, details.capabilities.maxImageExtent.height)
 			);
-
-		std::cout << m_swapChainExtent.width << "x" << m_swapChainExtent.height << std::endl;
 
 		auto scci = vk::SwapchainCreateInfoKHR(
 			vk::SwapchainCreateFlagsKHR(),
@@ -84,11 +82,10 @@ namespace iona {
 				),
 				vk::ImageSubresourceRange(vk::ImageAspectFlagBits::eColor, 0, 1, 0,	1)
 			);
-
 			return priv::VKInfo::device.createImageView(ivci);
 		});
 
-		
+
 		std::array<vk::AttachmentDescription, 1> colorAttachments{
 			vk::AttachmentDescription(
 				vk::AttachmentDescriptionFlags(),
@@ -105,7 +102,7 @@ namespace iona {
 
 		auto colorAttachmentRef = vk::AttachmentReference(
 			0U,
-			vk::ImageLayout::eColorAttachmentOptimal
+			vk::ImageLayout::eShaderReadOnlyOptimal
 		);
 
 		auto subpass = vk::SubpassDescription(
@@ -139,7 +136,7 @@ namespace iona {
 		priv::VKInfo::renderPass = priv::VKInfo::device.createRenderPass(rpci);
 
 		std::transform(m_swapChainImageViews.begin(), m_swapChainImageViews.end(), std::back_inserter(m_frameBuffers), [&](const vk::ImageView imageView) -> vk::Framebuffer {
-			auto fbci = vk::FramebufferCreateInfo(
+			return priv::VKInfo::device.createFramebuffer(vk::FramebufferCreateInfo(
 				vk::FramebufferCreateFlags(),
 				priv::VKInfo::renderPass,
 				1,
@@ -147,48 +144,45 @@ namespace iona {
 				m_swapChainExtent.width,
 				m_swapChainExtent.height,
 				1
-			);
-
-			return priv::VKInfo::device.createFramebuffer(fbci);
+			));
 		});
 
-		auto cpci = vk::CommandPoolCreateInfo(
+		priv::VKInfo::commandPool = priv::VKInfo::device.createCommandPool(vk::CommandPoolCreateInfo(
 			vk::CommandPoolCreateFlagBits::eTransient,
 			indices.graphicsFamily
-		);
+		));
 
-		priv::VKInfo::commandPool = priv::VKInfo::device.createCommandPool(cpci);
-		
 		m_shader = Shader("Res/Shaders/vert.spv", "Res/Shaders/frag.spv");
 
 		assert(priv::VKInfo::commandPool);
 
-		auto cbci = vk::CommandBufferAllocateInfo(
+		priv::VKInfo::commandBuffers = priv::VKInfo::device.allocateCommandBuffers(vk::CommandBufferAllocateInfo(
 			priv::VKInfo::commandPool,
 			vk::CommandBufferLevel::ePrimary,
 			m_frameBuffers.size()
-		);
+		));
 
-		priv::VKInfo::commandBuffers = priv::VKInfo::device.allocateCommandBuffers(cbci);
+		m_shader.bind();
 
+		static Texture tex("bbb.png");
+		
+		tex.bind(m_shader);
+		
 		std::for_each(priv::VKInfo::commandBuffers.begin(), priv::VKInfo::commandBuffers.end(), [&, i = 0](vk::CommandBuffer& commandBuffer) mutable {
-			auto cbbi = vk::CommandBufferBeginInfo(
+			commandBuffer.begin(vk::CommandBufferBeginInfo(
 				vk::CommandBufferUsageFlagBits::eSimultaneousUse
-			);
-			commandBuffer.begin(cbbi);
+			));
 
 			vk::ClearValue clearColor;
-			clearColor.setColor(vk::ClearColorValue().setFloat32({ 1.f, 1.f, 0.f, 1.f }));
+			clearColor.setColor(vk::ClearColorValue().setFloat32({ 0.f, 0.f, 0.f, 1.f }));
 
-			auto rpbi = vk::RenderPassBeginInfo(
+			commandBuffer.beginRenderPass(vk::RenderPassBeginInfo(
 				priv::VKInfo::renderPass,
 				m_frameBuffers[i],
 				vk::Rect2D(vk::Offset2D(0, 0), m_swapChainExtent),
 				1U,
 				&clearColor
-			);
-
-			commandBuffer.beginRenderPass(rpbi, vk::SubpassContents::eInline);
+			), vk::SubpassContents::eInline);
 
 			auto viewport = vk::Viewport(0.f, 0.f, 800.f, 800.f, 0.f, 1.f);
 
@@ -196,7 +190,7 @@ namespace iona {
 
 			commandBuffer.bindPipeline(vk::PipelineBindPoint::eGraphics, m_shader.get());
 
-			commandBuffer.draw(3U, 1U, 0U, 0U);
+			commandBuffer.draw(4U, 1U, 0U, 0U);
 
 			commandBuffer.endRenderPass();
 
@@ -207,13 +201,19 @@ namespace iona {
 
 		m_imageAvailableSemaphore = priv::VKInfo::device.createSemaphore(vk::SemaphoreCreateInfo());
 
-		m_renderFinishedSemaphore = priv::VKInfo::device.createSemaphore(vk::SemaphoreCreateInfo());
+		m_renderFinishedSemaphore = priv::VKInfo::device.createSemaphore(vk::SemaphoreCreateInfo());	
+	}
 
-		assert(m_imageAvailableSemaphore && m_renderFinishedSemaphore);
+	void Window::begin() {
+		
+	}
+
+	void Window::end() {
+
 	}
 
 	Window::~Window() {
-		glfwDestroyWindow(m_pWindow);
+		
 	}
 
 	bool Window::pollEvents() {
@@ -222,12 +222,13 @@ namespace iona {
 	}
 
 	void Window::present() {
+
 		vk::Result res;
 
 		auto nextImage = priv::VKInfo::device.acquireNextImageKHR(m_swapChain, std::numeric_limits<uint16_t>::max(), m_imageAvailableSemaphore, vk::Fence());
 
 		if (nextImage.result != vk::Result::eSuccess) {
-			std::cerr << "Next image failed" << std::endl;
+			std::cerr << "Next Image Error" << std::endl;
 		}
 
 		auto imageIndex = nextImage.value;

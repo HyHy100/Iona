@@ -1,21 +1,20 @@
 #include <Graphics/Vulkan/Helpers/Memory.hpp>
 #include <Exception/Exception.hpp>
 
+#include <iostream>
+
 namespace iona::priv {
-     uint32_t getMemoryType(const vk::PhysicalDevice& device, vk::MemoryPropertyFlags flags) {
+     uint32_t getMemoryType(const vk::PhysicalDevice& device, uint32_t typeFilter, vk::MemoryPropertyFlags flags) {
         auto props = device.getMemoryProperties();
 
         size_t i = 0;
 
-        for (; i < props.memoryTypeCount; i++) {
-            const auto type = props.memoryTypes[i];
-            if (type.propertyFlags & flags) {
+        for (int i = 0; i < props.memoryTypeCount; i++) {
+            if ((0x1 & typeFilter) == typeFilter && (props.memoryTypes[i].propertyFlags & flags) == flags) {
+                std::cout << "found" << std::endl;
                 return i;
             }
-        }
-
-        if (i == props.memoryTypeCount) {
-            throw Exception("no memory type '%s' found");
+            typeFilter >>= 0x1;
         }
 
         return std::numeric_limits<uint32_t>::max();

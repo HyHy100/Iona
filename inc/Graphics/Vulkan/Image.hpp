@@ -9,10 +9,32 @@
 #include <Graphics/Vulkan/VKInfo.hpp>
 #include <Generic/Size.hpp>
 #include <tuple>
-#define STB_IMAGE_IMPLEMENTATION
-#include <stb_image.h>
 #include <fstream>
 #include <mutex>
+#include <Graphics/Vulkan/Pipeline.hpp>
+#include <Graphics/Types.hpp>
+#include <Graphics/Pixel.hpp>
+
+namespace iona::priv {
+    void copyBufferToBuffer(const vk::Buffer& srcBuffer, 
+                                    vk::Buffer& dstBuffer, 
+                                    vk::DeviceSize size);
+
+
+    void copyBufferToImage(vk::Buffer src, 
+                                    vk::Image dst, 
+                                    SizeUint size);
+
+    void layout2layout(const vk::Image& image, 
+                                vk::Format format, 
+                                vk::ImageLayout oldLayout, 
+                                vk::ImageLayout newLayout);
+
+    void uploadContentToMemory(const std::string_view path, 
+                                        const vk::DeviceMemory& memory, 
+                                        SizeUint imageSize, 
+                                        const PixelFormatRGBA* const data);
+}
 
 namespace iona {
     class Texture {
@@ -20,21 +42,27 @@ namespace iona {
         Texture(const std::string_view path);
 
         ~Texture();
+
+        void bind(const Shader& pipeline);
     private:
-        std::pair<vk::Image, vk::DeviceMemory> createImage(uSize_t size, vk::Format format, uint32_t levels, uint32_t layers);
+        void createImage(SizeUint size, vk::Format format, uint32_t levels, uint32_t layers);
 
-        std::pair<vk::Buffer, vk::DeviceMemory> createStagingBuffer(const vk::Image& image);
+        void createStagingBuffer(const vk::Image& image);
 
-        void uploadContentToMemory(const std::string_view path, const vk::DeviceMemory& memory, uSize_t imageSize, const stbi_uc* const data);
+        void createImageView();
+
+        void createSamplers();
+
+        vk::ImageView m_imageView;
+
+        vk::Sampler m_sampler;
 
         vk::Image m_image;
         vk::DeviceMemory m_imageMemory;
-        
+
         vk::Buffer m_stagingBuffer;
         vk::DeviceMemory m_stagingMemory;
-        
-        vk::ImageView m_imageView;
 
-        std::mutex m_mapMutex;
+        uint32_t w, h;
     };
 }

@@ -4,14 +4,15 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
-  "/home/hyreos/Documentos/projects/Iona-1/Iona-1/iona.cpp" "/home/hyreos/Documentos/projects/Iona-1/Iona-1/CMakeFiles/iona.dir/iona.cpp.o"
-  "/home/hyreos/Documentos/projects/Iona-1/Iona-1/src/Exception/Exception.cpp" "/home/hyreos/Documentos/projects/Iona-1/Iona-1/CMakeFiles/iona.dir/src/Exception/Exception.cpp.o"
-  "/home/hyreos/Documentos/projects/Iona-1/Iona-1/src/Graphics/Vulkan/Helpers/Memory.cpp" "/home/hyreos/Documentos/projects/Iona-1/Iona-1/CMakeFiles/iona.dir/src/Graphics/Vulkan/Helpers/Memory.cpp.o"
-  "/home/hyreos/Documentos/projects/Iona-1/Iona-1/src/Graphics/Vulkan/Helpers/QueueFamilies.cpp" "/home/hyreos/Documentos/projects/Iona-1/Iona-1/CMakeFiles/iona.dir/src/Graphics/Vulkan/Helpers/QueueFamilies.cpp.o"
-  "/home/hyreos/Documentos/projects/Iona-1/Iona-1/src/Graphics/Vulkan/Image.cpp" "/home/hyreos/Documentos/projects/Iona-1/Iona-1/CMakeFiles/iona.dir/src/Graphics/Vulkan/Image.cpp.o"
-  "/home/hyreos/Documentos/projects/Iona-1/Iona-1/src/Graphics/Vulkan/Pipeline.cpp" "/home/hyreos/Documentos/projects/Iona-1/Iona-1/CMakeFiles/iona.dir/src/Graphics/Vulkan/Pipeline.cpp.o"
-  "/home/hyreos/Documentos/projects/Iona-1/Iona-1/src/Graphics/Vulkan/RNInit.cpp" "/home/hyreos/Documentos/projects/Iona-1/Iona-1/CMakeFiles/iona.dir/src/Graphics/Vulkan/RNInit.cpp.o"
-  "/home/hyreos/Documentos/projects/Iona-1/Iona-1/src/Window/Window.cpp" "/home/hyreos/Documentos/projects/Iona-1/Iona-1/CMakeFiles/iona.dir/src/Window/Window.cpp.o"
+  "/home/hyreos/Documentos/git/my/Iona/iona.cpp" "/home/hyreos/Documentos/git/my/Iona/CMakeFiles/iona.dir/iona.cpp.o"
+  "/home/hyreos/Documentos/git/my/Iona/src/Exception/Exception.cpp" "/home/hyreos/Documentos/git/my/Iona/CMakeFiles/iona.dir/src/Exception/Exception.cpp.o"
+  "/home/hyreos/Documentos/git/my/Iona/src/Graphics/Vulkan/Helpers/CommandBuffer.cpp" "/home/hyreos/Documentos/git/my/Iona/CMakeFiles/iona.dir/src/Graphics/Vulkan/Helpers/CommandBuffer.cpp.o"
+  "/home/hyreos/Documentos/git/my/Iona/src/Graphics/Vulkan/Helpers/Memory.cpp" "/home/hyreos/Documentos/git/my/Iona/CMakeFiles/iona.dir/src/Graphics/Vulkan/Helpers/Memory.cpp.o"
+  "/home/hyreos/Documentos/git/my/Iona/src/Graphics/Vulkan/Helpers/QueueFamilies.cpp" "/home/hyreos/Documentos/git/my/Iona/CMakeFiles/iona.dir/src/Graphics/Vulkan/Helpers/QueueFamilies.cpp.o"
+  "/home/hyreos/Documentos/git/my/Iona/src/Graphics/Vulkan/Image.cpp" "/home/hyreos/Documentos/git/my/Iona/CMakeFiles/iona.dir/src/Graphics/Vulkan/Image.cpp.o"
+  "/home/hyreos/Documentos/git/my/Iona/src/Graphics/Vulkan/Pipeline.cpp" "/home/hyreos/Documentos/git/my/Iona/CMakeFiles/iona.dir/src/Graphics/Vulkan/Pipeline.cpp.o"
+  "/home/hyreos/Documentos/git/my/Iona/src/Graphics/Vulkan/RNInit.cpp" "/home/hyreos/Documentos/git/my/Iona/CMakeFiles/iona.dir/src/Graphics/Vulkan/RNInit.cpp.o"
+  "/home/hyreos/Documentos/git/my/Iona/src/Window/Window.cpp" "/home/hyreos/Documentos/git/my/Iona/CMakeFiles/iona.dir/src/Window/Window.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 

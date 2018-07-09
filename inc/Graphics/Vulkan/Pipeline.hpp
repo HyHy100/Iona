@@ -19,11 +19,15 @@ namespace iona {
 
         ~Shader();
 
+        void bind();
+
         vk::Pipeline get();
-    private:
+
+        std::array<vk::DescriptorSetLayout, 1> dl;
         vk::Pipeline m_pipeline;
         vk::ShaderModule m_fragment;
         vk::ShaderModule m_vertex;
         vk::PipelineLayout layout;
+        static inline Shader* current;
     };
 }

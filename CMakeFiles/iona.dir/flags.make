@@ -6,5 +6,5 @@ CXX_FLAGS =  -std=c++1z   -fpermissive
 
 CXX_DEFINES = -DGLFW_INCLUDE_NONE=1
 
-CXX_INCLUDES = -I/home/hyreos/Documentos/projects/Iona-1/Iona-1 -I/home/hyreos/Documentos/projects/Iona-1/Iona-1/inc 
+CXX_INCLUDES = -I/home/hyreos/Documentos/git/my/Iona -I/home/hyreos/Documentos/git/my/Iona/inc 
 

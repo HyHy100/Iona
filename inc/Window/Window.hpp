@@ -10,6 +10,7 @@
 #include <Graphics/Vulkan/VKInfo.hpp>
 
 #include <Graphics/Vulkan/Pipeline.hpp>
+#include <Graphics/Vulkan/Image.hpp>
 
 #include "WSInit.hpp"
 
@@ -18,11 +19,15 @@ namespace iona {
 	public:
 		Window() = delete;
 
-		Window(uSize_t size, const std::string_view title);
+		Window(SizeUint size, const std::string_view title);
 
 		Window(const Window&) = delete;
 
 		~Window();
+
+		void begin();
+
+		void end();
 
 		bool pollEvents();
 

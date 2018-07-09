@@ -71,7 +71,7 @@ namespace iona {
         );
 
         auto assembly = vk::PipelineInputAssemblyStateCreateInfo(vk::PipelineInputAssemblyStateCreateFlags(),
-            vk::PrimitiveTopology::eTriangleList,
+            vk::PrimitiveTopology::eTriangleFan,
             VK_FALSE
         );
 
@@ -103,13 +103,18 @@ namespace iona {
             vk::SampleCountFlagBits::e1,
             VK_FALSE,
             0.f,
-            nullptr,
+            0,
             VK_FALSE,
             VK_TRUE
         );
 
         std::array<vk::PipelineColorBlendAttachmentState, 1> attachs {
-             vk::PipelineColorBlendAttachmentState().setColorWriteMask(vk::ColorComponentFlagBits::eR | vk::ColorComponentFlagBits::eG | vk::ColorComponentFlagBits::eB | vk::ColorComponentFlagBits::eA).setBlendEnable(false)
+             vk::PipelineColorBlendAttachmentState().setColorWriteMask(
+                 vk::ColorComponentFlagBits::eR | 
+                 vk::ColorComponentFlagBits::eG | 
+                 vk::ColorComponentFlagBits::eB | 
+                 vk::ColorComponentFlagBits::eA
+             ).setBlendEnable(VK_FALSE)
         };
 
         auto colorBlend = vk::PipelineColorBlendStateCreateInfo(vk::PipelineColorBlendStateCreateFlags(),
@@ -120,7 +125,7 @@ namespace iona {
             {{ 0.f, 0.f, 0.f, 0.f }}
         );
 
-        std::array<vk::DynamicState, 2> dynStates {
+        std::array<vk::DynamicState, 2u> dynStates {
             vk::DynamicState::eLineWidth,
             vk::DynamicState::eViewport
         };
@@ -130,7 +135,17 @@ namespace iona {
             dynStates.data()
         );
 
-        auto pipelineLayoutInfo = vk::PipelineLayoutCreateInfo(vk::PipelineLayoutCreateFlags(), 0, nullptr, 0, nullptr);
+        std::array<vk::DescriptorSetLayoutBinding, 1u> bindings {
+            vk::DescriptorSetLayoutBinding(1u, vk::DescriptorType::eCombinedImageSampler, 1u, vk::ShaderStageFlagBits::eFragment)
+        };
+
+        dl[0] =  priv::VKInfo::device.createDescriptorSetLayout(vk::DescriptorSetLayoutCreateInfo(
+                    vk::DescriptorSetLayoutCreateFlags(),
+                    bindings.size(),
+                    bindings.data()
+                ));
+
+        auto pipelineLayoutInfo = vk::PipelineLayoutCreateInfo(vk::PipelineLayoutCreateFlags(), dl.size(), dl.data());
 
         layout = priv::VKInfo::device.createPipelineLayout(pipelineLayoutInfo);
 
@@ -157,8 +172,12 @@ namespace iona {
         priv::VKInfo::device.destroyShaderModule(m_vertex);
     }
 
+    void Shader::bind() {
+        current = this;
+    }
+
     Shader::~Shader() {
-        
+       
     }
     
     vk::Pipeline Shader::get() {

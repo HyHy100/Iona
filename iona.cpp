@@ -4,8 +4,8 @@
 
 int main()
 {
-	iona::Window window(iona::uSize_t(800, 800), "MIWA VULKAN EDITION");
-
+	iona::Window window(iona::SizeUint(800, 800), "MIWA VULKAN EDITION");
+    
     while (window.pollEvents()) {
         window.present();
     }

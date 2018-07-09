@@ -48,10 +48,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/hyreos/Documentos/projects/Iona-1/Iona-1
+CMAKE_SOURCE_DIR = /home/hyreos/Documentos/git/my/Iona
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/hyreos/Documentos/projects/Iona-1/Iona-1
+CMAKE_BINARY_DIR = /home/hyreos/Documentos/git/my/Iona
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -69,8 +69,8 @@ rebuild_cache/fast: rebuild_cache
 
 # Special rule for the target edit_cache
 edit_cache:
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake cache editor..."
-	/usr/bin/ccmake -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "No interactive CMake dialog available..."
+	/usr/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
 .PHONY : edit_cache
 
 # Special rule for the target edit_cache
@@ -80,9 +80,9 @@ edit_cache/fast: edit_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/hyreos/Documentos/projects/Iona-1/Iona-1/CMakeFiles /home/hyreos/Documentos/projects/Iona-1/Iona-1/CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/hyreos/Documentos/git/my/Iona/CMakeFiles /home/hyreos/Documentos/git/my/Iona/CMakeFiles/progress.marks
 	$(MAKE) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/hyreos/Documentos/projects/Iona-1/Iona-1/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/hyreos/Documentos/git/my/Iona/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -176,6 +176,33 @@ src/Exception/Exception.s: src/Exception/Exception.cpp.s
 src/Exception/Exception.cpp.s:
 	$(MAKE) -f CMakeFiles/iona.dir/build.make CMakeFiles/iona.dir/src/Exception/Exception.cpp.s
 .PHONY : src/Exception/Exception.cpp.s
+
+src/Graphics/Vulkan/Helpers/CommandBuffer.o: src/Graphics/Vulkan/Helpers/CommandBuffer.cpp.o
+
+.PHONY : src/Graphics/Vulkan/Helpers/CommandBuffer.o
+
+# target to build an object file
+src/Graphics/Vulkan/Helpers/CommandBuffer.cpp.o:
+	$(MAKE) -f CMakeFiles/iona.dir/build.make CMakeFiles/iona.dir/src/Graphics/Vulkan/Helpers/CommandBuffer.cpp.o
+.PHONY : src/Graphics/Vulkan/Helpers/CommandBuffer.cpp.o
+
+src/Graphics/Vulkan/Helpers/CommandBuffer.i: src/Graphics/Vulkan/Helpers/CommandBuffer.cpp.i
+
+.PHONY : src/Graphics/Vulkan/Helpers/CommandBuffer.i
+
+# target to preprocess a source file
+src/Graphics/Vulkan/Helpers/CommandBuffer.cpp.i:
+	$(MAKE) -f CMakeFiles/iona.dir/build.make CMakeFiles/iona.dir/src/Graphics/Vulkan/Helpers/CommandBuffer.cpp.i
+.PHONY : src/Graphics/Vulkan/Helpers/CommandBuffer.cpp.i
+
+src/Graphics/Vulkan/Helpers/CommandBuffer.s: src/Graphics/Vulkan/Helpers/CommandBuffer.cpp.s
+
+.PHONY : src/Graphics/Vulkan/Helpers/CommandBuffer.s
+
+# target to generate assembly for a file
+src/Graphics/Vulkan/Helpers/CommandBuffer.cpp.s:
+	$(MAKE) -f CMakeFiles/iona.dir/build.make CMakeFiles/iona.dir/src/Graphics/Vulkan/Helpers/CommandBuffer.cpp.s
+.PHONY : src/Graphics/Vulkan/Helpers/CommandBuffer.cpp.s
 
 src/Graphics/Vulkan/Helpers/Memory.o: src/Graphics/Vulkan/Helpers/Memory.cpp.o
 
@@ -354,6 +381,9 @@ help:
 	@echo "... src/Exception/Exception.o"
 	@echo "... src/Exception/Exception.i"
 	@echo "... src/Exception/Exception.s"
+	@echo "... src/Graphics/Vulkan/Helpers/CommandBuffer.o"
+	@echo "... src/Graphics/Vulkan/Helpers/CommandBuffer.i"
+	@echo "... src/Graphics/Vulkan/Helpers/CommandBuffer.s"
 	@echo "... src/Graphics/Vulkan/Helpers/Memory.o"
 	@echo "... src/Graphics/Vulkan/Helpers/Memory.i"
 	@echo "... src/Graphics/Vulkan/Helpers/Memory.s"

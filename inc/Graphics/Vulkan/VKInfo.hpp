@@ -2,6 +2,7 @@
 
 #include <vulkan/vulkan.hpp>
 #include <vector>
+#include <atomic>
 
 namespace iona::priv {
 	class VKInfo {
@@ -13,5 +14,6 @@ namespace iona::priv {
 		static inline vk::CommandPool commandPool;
 		static inline std::vector<vk::CommandBuffer> commandBuffers;
 		static inline vk::Queue graphicsQueue;
+		static inline vk::DescriptorPool descPool;
 	};
 }

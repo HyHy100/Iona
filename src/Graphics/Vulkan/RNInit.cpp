@@ -61,9 +61,10 @@ namespace iona::priv {
 			"VK_LAYER_LUNARG_standard_validation"
 		};
 
-		std::vector<const char*> dLayers;
+		/*std::vector<const char*> dLayers;
+		dLayers.swap(requiredLayers);*/
 
-		{
+		/*{
 			auto availableLayers = dev.enumerateDeviceLayerProperties();
 
 			std::copy_if(requiredLayers.begin(), requiredLayers.end(), std::back_inserter(dLayers), [&](const char* layer) {
@@ -71,20 +72,18 @@ namespace iona::priv {
 					return std::strcmp(layer, layerProps.layerName);
 				}) == std::end(availableLayers);
 			});
-		}
+		}*/
 
-		{
-			auto props = dev.getQueueFamilyProperties();
-			std::all_of(props.begin(), props.end(), [&, i = 0](auto& prop) mutable {
-				if (static_cast<bool>(prop.queueFlags & vk::QueueFlagBits::eGraphics)) {
-					float pri{ 0.f };
-					qCreateInfos.push_back(vk::DeviceQueueCreateInfo(vk::DeviceQueueCreateFlags(), i, 1, &pri));
-					return true;
-				}
-				i++;
-				return false;
-			});
-		}
+		auto props = dev.getQueueFamilyProperties();
+		std::all_of(props.begin(), props.end(), [&, i = 0](auto& prop) mutable {
+			if (static_cast<bool>(prop.queueFlags & vk::QueueFlagBits::eGraphics)) {
+				float pri{ 0.f };
+				qCreateInfos.push_back(vk::DeviceQueueCreateInfo(vk::DeviceQueueCreateFlags(), i, 1, &pri));
+				return true;
+			}
+			i++;
+			return false;
+		});
 
 		if (qCreateInfos.empty()) {
 			throw Exception("no graphic queue found");
@@ -108,5 +107,11 @@ namespace iona::priv {
 		auto queueFamilies = queryFamilyIndices(VKInfo::instance, VKInfo::phyDevice);
 
 		VKInfo::graphicsQueue = VKInfo::device.getQueue(queueFamilies.graphicsFamily, 0);
+
+		 std::array<vk::DescriptorPoolSize, 1> poolSizes {
+            vk::DescriptorPoolSize(vk::DescriptorType::eCombinedImageSampler, 1U)
+        };
+
+		VKInfo::descPool = VKInfo::device.createDescriptorPool(vk::DescriptorPoolCreateInfo(vk::DescriptorPoolCreateFlags(), 1u, poolSizes.size(), poolSizes.data()));
 	}
 }
