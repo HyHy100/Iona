@@ -45,6 +45,7 @@ namespace iona {
 		vk::Extent2D m_swapChainExtent;
 		vk::Format m_format;
 		vk::ColorSpaceKHR m_colorSpace;
+		std::atomic_uint32_t m_imageIndex;
 
 		vk::Semaphore m_imageAvailableSemaphore;
 		vk::Semaphore m_renderFinishedSemaphore;

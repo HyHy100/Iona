@@ -198,16 +198,20 @@ namespace iona {
 
     Texture::~Texture() 
     {
+        priv::VKInfo::device.destroyImageView(m_imageView);
+        priv::VKInfo::device.destroyImage(m_image);
+        priv::VKInfo::device.destroySampler(m_sampler);
+        priv::VKInfo::device.freeMemory(m_imageMemory);
     }
 
-    void Texture::bind(const Shader& pipeline) 
+    void Texture::bind() 
     {
         auto imginfo = vk::DescriptorImageInfo(m_sampler, m_imageView, vk::ImageLayout::eShaderReadOnlyOptimal);
 
         auto descs = priv::VKInfo::device.allocateDescriptorSets(vk::DescriptorSetAllocateInfo(
             priv::VKInfo::descPool,
-            Shader::current->dl.size(),
-            Shader::current->dl.data()
+            Shader::current->descriptors().size(),
+            Shader::current->descriptors().data()
         ));
 
         auto wrDesc = vk::WriteDescriptorSet(
@@ -225,8 +229,10 @@ namespace iona {
 
         auto cb = priv::beginTempCommandBuffer();
         
-        cb.bindDescriptorSets(vk::PipelineBindPoint::eGraphics, Shader::current->layout, 0, descs, nullptr);
+        cb.bindDescriptorSets(vk::PipelineBindPoint::eGraphics, Shader::current->layout(), 0, descs, nullptr);
         
         priv::endTempCommandBuffer(cb);
+
+        priv::VKInfo::device.freeDescriptorSets(priv::VKInfo::descPool, descs);
     }
 }

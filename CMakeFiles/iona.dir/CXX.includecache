@@ -11,6 +11,10 @@ Iona.hpp
 -
 iostream
 -
+thread
+-
+chrono
+-
 
 /home/hyreos/Documentos/git/my/Iona/src/Exception/Exception.cpp
 Exception/Exception.hpp
@@ -44,6 +48,8 @@ Graphics/ImageLoader.hpp
 
 /home/hyreos/Documentos/git/my/Iona/src/Graphics/Vulkan/Pipeline.cpp
 Graphics/Vulkan/Pipeline.hpp
+-
+Graphics/Vulkan/Helpers/CommandBuffer.hpp
 -
 Exception/Exception.hpp
 -
@@ -167,6 +173,8 @@ mutex
 -
 Graphics/Vulkan/Pipeline.hpp
 -
+Graphics/Vulkan/VkBase.hpp
+-
 Graphics/Types.hpp
 -
 Graphics/Pixel.hpp
@@ -199,6 +207,8 @@ vector
 -
 atomic
 -
+
+inc/Graphics/Vulkan/VkBase.hpp
 
 inc/Iona.hpp
 Exception/Exception.hpp

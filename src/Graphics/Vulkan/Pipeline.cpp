@@ -1,11 +1,15 @@
 #include <Graphics/Vulkan/Pipeline.hpp>
+#include <Graphics/Vulkan/Helpers/CommandBuffer.hpp>
 #include <Exception/Exception.hpp>
 
 #include <iostream>
 #include <experimental/filesystem>
 
 namespace iona {
-    Shader::Shader(const std::string_view vertex, const std::string_view fragment) {
+    Shader::Shader(const std::string_view vertex, const std::string_view fragment) 
+    {
+        vk::ShaderModule fragmentModule, vertexModule;
+        
         {
             std::vector<char> shaderData;
 
@@ -23,13 +27,11 @@ namespace iona {
 
             file.close();
 
-            auto smci = vk::ShaderModuleCreateInfo(
+            vertexModule = priv::VKInfo::device.createShaderModule(vk::ShaderModuleCreateInfo(
                 vk::ShaderModuleCreateFlags(),
                 shaderData.size(),
                 reinterpret_cast<uint32_t*>(shaderData.data())
-            );
-
-            m_vertex = priv::VKInfo::device.createShaderModule(smci);
+            ));
         }
 
         {
@@ -49,18 +51,16 @@ namespace iona {
 
             file.close();
 
-            auto smci = vk::ShaderModuleCreateInfo(
+            fragmentModule = priv::VKInfo::device.createShaderModule(vk::ShaderModuleCreateInfo(
                 vk::ShaderModuleCreateFlags(),
                 shaderData.size(),
                 reinterpret_cast<uint32_t*>(shaderData.data())
-            );
-
-            m_fragment = priv::VKInfo::device.createShaderModule(smci);
+            ));
         }
 
         std::array<vk::PipelineShaderStageCreateInfo, 2> shaderStages { 
-            vk::PipelineShaderStageCreateInfo(vk::PipelineShaderStageCreateFlags(), vk::ShaderStageFlagBits::eVertex, m_vertex, "main"),
-            vk::PipelineShaderStageCreateInfo(vk::PipelineShaderStageCreateFlags(), vk::ShaderStageFlagBits::eFragment, m_fragment, "main")
+            vk::PipelineShaderStageCreateInfo(vk::PipelineShaderStageCreateFlags(), vk::ShaderStageFlagBits::eVertex, vertexModule, "main"),
+            vk::PipelineShaderStageCreateInfo(vk::PipelineShaderStageCreateFlags(), vk::ShaderStageFlagBits::eFragment, fragmentModule, "main")
         };
 
         auto vertexInput = vk::PipelineVertexInputStateCreateInfo(vk::PipelineVertexInputStateCreateFlags(),
@@ -139,7 +139,7 @@ namespace iona {
             vk::DescriptorSetLayoutBinding(1u, vk::DescriptorType::eCombinedImageSampler, 1u, vk::ShaderStageFlagBits::eFragment)
         };
 
-        dl[0] =  priv::VKInfo::device.createDescriptorSetLayout(vk::DescriptorSetLayoutCreateInfo(
+        dl.at(0) =  priv::VKInfo::device.createDescriptorSetLayout(vk::DescriptorSetLayoutCreateInfo(
                     vk::DescriptorSetLayoutCreateFlags(),
                     bindings.size(),
                     bindings.data()
@@ -147,7 +147,7 @@ namespace iona {
 
         auto pipelineLayoutInfo = vk::PipelineLayoutCreateInfo(vk::PipelineLayoutCreateFlags(), dl.size(), dl.data());
 
-        layout = priv::VKInfo::device.createPipelineLayout(pipelineLayoutInfo);
+        m_layout = priv::VKInfo::device.createPipelineLayout(pipelineLayoutInfo);
 
         auto pipelineInfo = vk::GraphicsPipelineCreateInfo(
             vk::PipelineCreateFlags(),
@@ -162,25 +162,26 @@ namespace iona {
             nullptr,
             &colorBlend,
             &dynState,
-            layout,
+            m_layout,
             priv::VKInfo::renderPass
         );
 
         m_pipeline = priv::VKInfo::device.createGraphicsPipeline(vk::PipelineCache(), pipelineInfo);
 
-        priv::VKInfo::device.destroyShaderModule(m_fragment);
-        priv::VKInfo::device.destroyShaderModule(m_vertex);
+        priv::VKInfo::device.destroyShaderModule(fragmentModule);
+
+        priv::VKInfo::device.destroyShaderModule(vertexModule);
     }
 
-    void Shader::bind() {
+    void Shader::bind() 
+    {
+        priv::VKInfo::currentCommandBuffer.bindPipeline(vk::PipelineBindPoint::eGraphics, m_pipeline);
+
         current = this;
     }
 
-    Shader::~Shader() {
-       
-    }
-    
-    vk::Pipeline Shader::get() {
-        return m_pipeline;
+    Shader::~Shader() 
+    {
+        priv::VKInfo::device.destroyPipeline(m_pipeline);
     }
 }

@@ -13,6 +13,7 @@ CMakeFiles/iona.dir/iona.cpp.o
  inc/Graphics/Vulkan/Pipeline.hpp
  inc/Graphics/Vulkan/RNInit.hpp
  inc/Graphics/Vulkan/VKInfo.hpp
+ inc/Graphics/Vulkan/VkBase.hpp
  inc/Iona.hpp
  inc/Window/WSInit.hpp
  inc/Window/Window.hpp
@@ -42,9 +43,11 @@ CMakeFiles/iona.dir/src/Graphics/Vulkan/Image.cpp.o
  inc/Graphics/Vulkan/Image.hpp
  inc/Graphics/Vulkan/Pipeline.hpp
  inc/Graphics/Vulkan/VKInfo.hpp
+ inc/Graphics/Vulkan/VkBase.hpp
 CMakeFiles/iona.dir/src/Graphics/Vulkan/Pipeline.cpp.o
  /home/hyreos/Documentos/git/my/Iona/src/Graphics/Vulkan/Pipeline.cpp
  inc/Exception/Exception.hpp
+ inc/Graphics/Vulkan/Helpers/CommandBuffer.hpp
  inc/Graphics/Vulkan/Pipeline.hpp
  inc/Graphics/Vulkan/VKInfo.hpp
 CMakeFiles/iona.dir/src/Graphics/Vulkan/RNInit.cpp.o
@@ -65,5 +68,6 @@ CMakeFiles/iona.dir/src/Window/Window.cpp.o
  inc/Graphics/Vulkan/Image.hpp
  inc/Graphics/Vulkan/Pipeline.hpp
  inc/Graphics/Vulkan/VKInfo.hpp
+ inc/Graphics/Vulkan/VkBase.hpp
  inc/Window/WSInit.hpp
  inc/Window/Window.hpp

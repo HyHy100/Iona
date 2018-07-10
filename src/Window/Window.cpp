@@ -6,11 +6,20 @@
 #include <algorithm>
 
 namespace iona {
-	Window::Window(SizeUint size, const std::string_view title) {
+	Window::Window(SizeUint size, const std::string_view title) 
+	{
+		m_imageIndex.store(0U, std::memory_order::memory_order_relaxed);
+
 		glfwWindowHint(GLFW_CLIENT_API, GLFW_NO_API);
+		
 		m_pWindow = glfwCreateWindow(size.w, size.h, title.data(), nullptr, nullptr);
 
-		assert(glfwCreateWindowSurface(priv::VKInfo::instance, m_pWindow, nullptr, reinterpret_cast<VkSurfaceKHR*>(&m_surface)) == static_cast<VkResult>(vk::Result::eSuccess));
+		assert(glfwCreateWindowSurface(
+				priv::VKInfo::instance, 
+				m_pWindow, 
+				nullptr, 
+				reinterpret_cast<VkSurfaceKHR*>(&m_surface)
+			) == static_cast<VkResult>(vk::Result::eSuccess));
 
 		auto indices = priv::queryFamilyIndices(priv::VKInfo::instance, priv::VKInfo::phyDevice);
 
@@ -18,28 +27,35 @@ namespace iona {
 
 		auto details = priv::querySwapchainSupport(priv::VKInfo::phyDevice, m_surface);
 
-		auto formatIt = std::find_if(details.formats.begin(), details.formats.end(), [](const vk::SurfaceFormatKHR& availableFormat) {
+		auto formatIt = std::find_if(details.formats.begin(), details.formats.end(), 
+		[](const vk::SurfaceFormatKHR& availableFormat) {
 			return (availableFormat.format == vk::Format::eB8G8R8A8Unorm) && (availableFormat.colorSpace == vk::ColorSpaceKHR::eSrgbNonlinear);
 		});
 
-		if (formatIt == std::end(details.formats)) {
+		if (formatIt == std::end(details.formats)) 
+		{
 			formatIt = std::begin(details.formats);
 		}
 
-		auto presentModeIt = std::find_if(details.presentModes.begin(), details.presentModes.end(), [](const vk::PresentModeKHR& availableMode) {
+		auto presentModeIt = std::find_if(details.presentModes.begin(), details.presentModes.end(), 
+		[](const vk::PresentModeKHR& availableMode) {
 			return availableMode == vk::PresentModeKHR::eMailbox;
 		});
 
-		if (presentModeIt == std::end(details.presentModes)) {
+		if (presentModeIt == std::end(details.presentModes)) 
+		{
 			presentModeIt = std::begin(details.presentModes);
 		}
 
 		m_swapChainExtent = vk::Extent2D(
-				std::clamp(size.w, details.capabilities.minImageExtent.width, details.capabilities.maxImageExtent.width),
-				std::clamp(size.h, details.capabilities.minImageExtent.height, details.capabilities.maxImageExtent.height)
-			);
+			std::clamp(size.w, details.capabilities.minImageExtent.width, details.capabilities.maxImageExtent.width),
+			std::clamp(size.h, details.capabilities.minImageExtent.height, details.capabilities.maxImageExtent.height)
+		);
 
-		auto scci = vk::SwapchainCreateInfoKHR(
+		m_format = formatIt->format;
+		m_colorSpace = formatIt->colorSpace;
+
+		m_swapChain = priv::VKInfo::device.createSwapchainKHR(vk::SwapchainCreateInfoKHR(
 			vk::SwapchainCreateFlagsKHR(),
 			m_surface,
 			details.capabilities.minImageCount,
@@ -49,27 +65,23 @@ namespace iona {
 			details.capabilities.maxImageArrayLayers,
 			vk::ImageUsageFlagBits::eColorAttachment,
 			vk::SharingMode::eExclusive,
-			1,
+			1U,
 			&indices.graphicsFamily,
 			details.capabilities.currentTransform,
 			vk::CompositeAlphaFlagBitsKHR::eOpaque,
 			*presentModeIt,
 			true
-		);
-
-		m_format = formatIt->format;
-		m_colorSpace = formatIt->colorSpace;
-
-		m_swapChain = priv::VKInfo::device.createSwapchainKHR(scci);
+		));
 
 		assert(m_swapChain);
 
 		m_swapchainImages = priv::VKInfo::device.getSwapchainImagesKHR(m_swapChain);
 
-		assert(m_swapchainImages.size() != 0);
+		assert(m_swapchainImages.size() != 0U);
 
-		std::transform(m_swapchainImages.begin(), m_swapchainImages.end(), std::back_inserter(m_swapChainImageViews), [&](const vk::Image& image) -> vk::ImageView {
-			auto ivci = vk::ImageViewCreateInfo(
+		std::transform(m_swapchainImages.begin(), m_swapchainImages.end(), std::back_inserter(m_swapChainImageViews), 
+		[&](const vk::Image& image) -> vk::ImageView {
+			return priv::VKInfo::device.createImageView(vk::ImageViewCreateInfo(
 				vk::ImageViewCreateFlags(),
 				image,
 				vk::ImageViewType::e2D,
@@ -81,12 +93,11 @@ namespace iona {
 					vk::ComponentSwizzle::eIdentity
 				),
 				vk::ImageSubresourceRange(vk::ImageAspectFlagBits::eColor, 0, 1, 0,	1)
-			);
-			return priv::VKInfo::device.createImageView(ivci);
+			));
 		});
 
 
-		std::array<vk::AttachmentDescription, 1> colorAttachments{
+		std::array<vk::AttachmentDescription, 1U> colorAttachments {
 			vk::AttachmentDescription(
 				vk::AttachmentDescriptionFlags(),
 				m_format,
@@ -105,37 +116,40 @@ namespace iona {
 			vk::ImageLayout::eShaderReadOnlyOptimal
 		);
 
-		auto subpass = vk::SubpassDescription(
-			vk::SubpassDescriptionFlags(),
-			vk::PipelineBindPoint::eGraphics,
-			0,
-			nullptr,
-			1,
-			&colorAttachmentRef
-		);
+		std::array<vk::SubpassDescription, 1U> subpasses {
+			vk::SubpassDescription(
+				vk::SubpassDescriptionFlags(),
+				vk::PipelineBindPoint::eGraphics,
+				0,
+				nullptr,
+				1,
+				&colorAttachmentRef
+			)
+		};
 
-		auto dependency = vk::SubpassDependency(
-			0U,
-			0U,
-			vk::PipelineStageFlagBits::eColorAttachmentOutput,
-			vk::PipelineStageFlagBits::eColorAttachmentOutput,
-			vk::AccessFlags(),
-			vk::AccessFlagBits::eColorAttachmentRead | vk::AccessFlagBits::eColorAttachmentWrite
-		);
+		std::array<vk::SubpassDependency, 1U> dependencies {
+			vk::SubpassDependency(
+				0U,
+				0U,
+				vk::PipelineStageFlagBits::eColorAttachmentOutput,
+				vk::PipelineStageFlagBits::eColorAttachmentOutput,
+				vk::AccessFlags(),
+				vk::AccessFlagBits::eColorAttachmentRead | vk::AccessFlagBits::eColorAttachmentWrite
+			)
+		};
 
-		auto rpci = vk::RenderPassCreateInfo(
+		priv::VKInfo::renderPass = priv::VKInfo::device.createRenderPass(vk::RenderPassCreateInfo(
 			vk::RenderPassCreateFlags(),
 			colorAttachments.size(),
 			colorAttachments.data(),
-			1,
-			&subpass,
-			1,
-			&dependency
-		);
+			subpasses.size(),
+			subpasses.data(),
+			dependencies.size(),
+			dependencies.data()
+		));
 
-		priv::VKInfo::renderPass = priv::VKInfo::device.createRenderPass(rpci);
-
-		std::transform(m_swapChainImageViews.begin(), m_swapChainImageViews.end(), std::back_inserter(m_frameBuffers), [&](const vk::ImageView imageView) -> vk::Framebuffer {
+		std::transform(m_swapChainImageViews.begin(), m_swapChainImageViews.end(), std::back_inserter(m_frameBuffers), 
+		[&](const vk::ImageView imageView) -> vk::Framebuffer {
 			return priv::VKInfo::device.createFramebuffer(vk::FramebufferCreateInfo(
 				vk::FramebufferCreateFlags(),
 				priv::VKInfo::renderPass,
@@ -156,103 +170,130 @@ namespace iona {
 
 		assert(priv::VKInfo::commandPool);
 
-		priv::VKInfo::commandBuffers = priv::VKInfo::device.allocateCommandBuffers(vk::CommandBufferAllocateInfo(
-			priv::VKInfo::commandPool,
-			vk::CommandBufferLevel::ePrimary,
-			m_frameBuffers.size()
+		m_imageAvailableSemaphore = priv::VKInfo::device.createSemaphore(vk::SemaphoreCreateInfo());
+
+		m_renderFinishedSemaphore = priv::VKInfo::device.createSemaphore(vk::SemaphoreCreateInfo());
+
+		priv::VKInfo::commandBuffers = priv::VKInfo::device.allocateCommandBuffers(
+			vk::CommandBufferAllocateInfo(
+				priv::VKInfo::commandPool,
+				vk::CommandBufferLevel::ePrimary,
+				m_swapChainImageViews.size()
+			)
+		);
+
+		priv::VKInfo::currentCommandBuffer = priv::VKInfo::commandBuffers.front();
+	}
+
+	void Window::begin() 
+	{
+		auto& cmdbuf = priv::VKInfo::commandBuffers.at(m_imageIndex.load(std::memory_order::memory_order_relaxed));
+		priv::VKInfo::currentCommandBuffer = cmdbuf;
+
+		cmdbuf.begin(vk::CommandBufferBeginInfo(
+			vk::CommandBufferUsageFlagBits::eRenderPassContinue
 		));
 
 		m_shader.bind();
 
-		static Texture tex("bbb.png");
-		
-		tex.bind(m_shader);
-		
-		std::for_each(priv::VKInfo::commandBuffers.begin(), priv::VKInfo::commandBuffers.end(), [&, i = 0](vk::CommandBuffer& commandBuffer) mutable {
-			commandBuffer.begin(vk::CommandBufferBeginInfo(
-				vk::CommandBufferUsageFlagBits::eSimultaneousUse
-			));
+		vk::ClearValue clearColor;
+		clearColor.setColor(vk::ClearColorValue().setFloat32({ 0.f, 0.f, 1.f, 1.f }));
 
-			vk::ClearValue clearColor;
-			clearColor.setColor(vk::ClearColorValue().setFloat32({ 0.f, 0.f, 0.f, 1.f }));
-
-			commandBuffer.beginRenderPass(vk::RenderPassBeginInfo(
+		cmdbuf.beginRenderPass(
+			vk::RenderPassBeginInfo(
 				priv::VKInfo::renderPass,
-				m_frameBuffers[i],
+				m_frameBuffers.at(m_imageIndex.load(std::memory_order::memory_order_relaxed)),
 				vk::Rect2D(vk::Offset2D(0, 0), m_swapChainExtent),
 				1U,
 				&clearColor
-			), vk::SubpassContents::eInline);
+			), 
+		vk::SubpassContents::eInline);
 
-			auto viewport = vk::Viewport(0.f, 0.f, 800.f, 800.f, 0.f, 1.f);
+		auto viewport = vk::Viewport(0.f, 0.f, 800.f, 800.f, 0.f, 1.f);
 
-			commandBuffer.setViewport(0, viewport);
+		cmdbuf.setViewport(0, viewport);
 
-			commandBuffer.bindPipeline(vk::PipelineBindPoint::eGraphics, m_shader.get());
+		static Texture tex("aa.png");
 
-			commandBuffer.draw(4U, 1U, 0U, 0U);
+		tex.bind();
+	}
 
-			commandBuffer.endRenderPass();
+	void Window::end() 
+	{
+		auto& cmdbuf = priv::VKInfo::currentCommandBuffer;
+		
+		cmdbuf.endRenderPass();
 
-			commandBuffer.end();
+		cmdbuf.end();
+	}
 
-			i++;
+	Window::~Window() 
+	{
+		priv::VKInfo::device.waitIdle();
+
+		glfwDestroyWindow(m_pWindow);
+		
+		priv::VKInfo::device.destroySemaphore(m_imageAvailableSemaphore);
+		priv::VKInfo::device.destroySemaphore(m_renderFinishedSemaphore);
+		priv::VKInfo::device.freeCommandBuffers(priv::VKInfo::commandPool, priv::VKInfo::commandBuffers);
+
+		std::for_each(m_swapChainImageViews.begin(), m_swapChainImageViews.end(), 
+		[](auto& view) {
+			priv::VKInfo::device.destroyImageView(view);
 		});
 
-		m_imageAvailableSemaphore = priv::VKInfo::device.createSemaphore(vk::SemaphoreCreateInfo());
-
-		m_renderFinishedSemaphore = priv::VKInfo::device.createSemaphore(vk::SemaphoreCreateInfo());	
+		std::for_each(m_swapchainImages.begin(), m_swapchainImages.end(), 
+		[](auto& view) {
+			priv::VKInfo::device.destroyImage(view);
+		});
 	}
 
-	void Window::begin() {
-		
-	}
-
-	void Window::end() {
-
-	}
-
-	Window::~Window() {
-		
-	}
-
-	bool Window::pollEvents() {
+	bool Window::pollEvents() 
+	{
 		glfwPollEvents();
 		return !glfwWindowShouldClose(m_pWindow);
 	}
 
-	void Window::present() {
-
+	void Window::present() 
+	{
 		vk::Result res;
 
-		auto nextImage = priv::VKInfo::device.acquireNextImageKHR(m_swapChain, std::numeric_limits<uint16_t>::max(), m_imageAvailableSemaphore, vk::Fence());
+		auto nextImage = priv::VKInfo::device.acquireNextImageKHR(
+							m_swapChain, 
+							std::numeric_limits<uint16_t>::max(), 
+							m_imageAvailableSemaphore,
+							vk::Fence()
+						);
 
 		if (nextImage.result != vk::Result::eSuccess) {
 			std::cerr << "Next Image Error" << std::endl;
 		}
 
-		auto imageIndex = nextImage.value;
+		auto imageIndex = m_imageIndex.exchange(
+			nextImage.value,
+			std::memory_order::memory_order_relaxed
+		);
 
-		std::array<vk::PipelineStageFlags, 1> waitStages = {
+		std::array<vk::PipelineStageFlags, 1> waitStages {
 			vk::PipelineStageFlagBits::eColorAttachmentOutput
 		};
 
 		auto submitInfo = vk::SubmitInfo(
-			1,
+			1U,
 			&m_imageAvailableSemaphore,
 			waitStages.data(),
-			1,
-			&priv::VKInfo::commandBuffers[imageIndex],
-			1,
+			1U,
+			&priv::VKInfo::commandBuffers.at(imageIndex),
+			1U,
 			&m_renderFinishedSemaphore
 		);		
 
 		priv::VKInfo::graphicsQueue.submit(submitInfo, vk::Fence());
 
 		auto presentInfo = vk::PresentInfoKHR(
-			1,
+			1U,
 			&m_renderFinishedSemaphore,
-			1,
+			1U,
 			&m_swapChain,
 			&imageIndex,
 			&res

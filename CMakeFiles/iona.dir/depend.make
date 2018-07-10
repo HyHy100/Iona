@@ -12,6 +12,7 @@ CMakeFiles/iona.dir/iona.cpp.o: inc/Graphics/Vulkan/Image.hpp
 CMakeFiles/iona.dir/iona.cpp.o: inc/Graphics/Vulkan/Pipeline.hpp
 CMakeFiles/iona.dir/iona.cpp.o: inc/Graphics/Vulkan/RNInit.hpp
 CMakeFiles/iona.dir/iona.cpp.o: inc/Graphics/Vulkan/VKInfo.hpp
+CMakeFiles/iona.dir/iona.cpp.o: inc/Graphics/Vulkan/VkBase.hpp
 CMakeFiles/iona.dir/iona.cpp.o: inc/Iona.hpp
 CMakeFiles/iona.dir/iona.cpp.o: inc/Window/WSInit.hpp
 CMakeFiles/iona.dir/iona.cpp.o: inc/Window/Window.hpp
@@ -41,9 +42,11 @@ CMakeFiles/iona.dir/src/Graphics/Vulkan/Image.cpp.o: inc/Graphics/Vulkan/Helpers
 CMakeFiles/iona.dir/src/Graphics/Vulkan/Image.cpp.o: inc/Graphics/Vulkan/Image.hpp
 CMakeFiles/iona.dir/src/Graphics/Vulkan/Image.cpp.o: inc/Graphics/Vulkan/Pipeline.hpp
 CMakeFiles/iona.dir/src/Graphics/Vulkan/Image.cpp.o: inc/Graphics/Vulkan/VKInfo.hpp
+CMakeFiles/iona.dir/src/Graphics/Vulkan/Image.cpp.o: inc/Graphics/Vulkan/VkBase.hpp
 
 CMakeFiles/iona.dir/src/Graphics/Vulkan/Pipeline.cpp.o: src/Graphics/Vulkan/Pipeline.cpp
 CMakeFiles/iona.dir/src/Graphics/Vulkan/Pipeline.cpp.o: inc/Exception/Exception.hpp
+CMakeFiles/iona.dir/src/Graphics/Vulkan/Pipeline.cpp.o: inc/Graphics/Vulkan/Helpers/CommandBuffer.hpp
 CMakeFiles/iona.dir/src/Graphics/Vulkan/Pipeline.cpp.o: inc/Graphics/Vulkan/Pipeline.hpp
 CMakeFiles/iona.dir/src/Graphics/Vulkan/Pipeline.cpp.o: inc/Graphics/Vulkan/VKInfo.hpp
 
@@ -64,6 +67,7 @@ CMakeFiles/iona.dir/src/Window/Window.cpp.o: inc/Graphics/Vulkan/Helpers/Swapcha
 CMakeFiles/iona.dir/src/Window/Window.cpp.o: inc/Graphics/Vulkan/Image.hpp
 CMakeFiles/iona.dir/src/Window/Window.cpp.o: inc/Graphics/Vulkan/Pipeline.hpp
 CMakeFiles/iona.dir/src/Window/Window.cpp.o: inc/Graphics/Vulkan/VKInfo.hpp
+CMakeFiles/iona.dir/src/Window/Window.cpp.o: inc/Graphics/Vulkan/VkBase.hpp
 CMakeFiles/iona.dir/src/Window/Window.cpp.o: inc/Window/WSInit.hpp
 CMakeFiles/iona.dir/src/Window/Window.cpp.o: inc/Window/Window.hpp
 

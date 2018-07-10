@@ -12,6 +12,7 @@
 #include <fstream>
 #include <mutex>
 #include <Graphics/Vulkan/Pipeline.hpp>
+#include <Graphics/Vulkan/VkBase.hpp>
 #include <Graphics/Types.hpp>
 #include <Graphics/Pixel.hpp>
 
@@ -37,13 +38,13 @@ namespace iona::priv {
 }
 
 namespace iona {
-    class Texture {
+    class Texture : priv::VkBase {
     public:
         Texture(const std::string_view path);
 
         ~Texture();
 
-        void bind(const Shader& pipeline);
+        void bind();
     private:
         void createImage(SizeUint size, vk::Format format, uint32_t levels, uint32_t layers);
 

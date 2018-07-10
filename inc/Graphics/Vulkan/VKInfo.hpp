@@ -13,6 +13,7 @@ namespace iona::priv {
 		static inline vk::RenderPass renderPass;
 		static inline vk::CommandPool commandPool;
 		static inline std::vector<vk::CommandBuffer> commandBuffers;
+		static inline vk::CommandBuffer currentCommandBuffer;
 		static inline vk::Queue graphicsQueue;
 		static inline vk::DescriptorPool descPool;
 	};
