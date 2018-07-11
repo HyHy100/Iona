@@ -177,6 +177,87 @@ src/Exception/Exception.cpp.s:
 	$(MAKE) -f CMakeFiles/iona.dir/build.make CMakeFiles/iona.dir/src/Exception/Exception.cpp.s
 .PHONY : src/Exception/Exception.cpp.s
 
+src/Generic/Iterator.o: src/Generic/Iterator.cpp.o
+
+.PHONY : src/Generic/Iterator.o
+
+# target to build an object file
+src/Generic/Iterator.cpp.o:
+	$(MAKE) -f CMakeFiles/iona.dir/build.make CMakeFiles/iona.dir/src/Generic/Iterator.cpp.o
+.PHONY : src/Generic/Iterator.cpp.o
+
+src/Generic/Iterator.i: src/Generic/Iterator.cpp.i
+
+.PHONY : src/Generic/Iterator.i
+
+# target to preprocess a source file
+src/Generic/Iterator.cpp.i:
+	$(MAKE) -f CMakeFiles/iona.dir/build.make CMakeFiles/iona.dir/src/Generic/Iterator.cpp.i
+.PHONY : src/Generic/Iterator.cpp.i
+
+src/Generic/Iterator.s: src/Generic/Iterator.cpp.s
+
+.PHONY : src/Generic/Iterator.s
+
+# target to generate assembly for a file
+src/Generic/Iterator.cpp.s:
+	$(MAKE) -f CMakeFiles/iona.dir/build.make CMakeFiles/iona.dir/src/Generic/Iterator.cpp.s
+.PHONY : src/Generic/Iterator.cpp.s
+
+src/Graphics/ImageLoader.o: src/Graphics/ImageLoader.cpp.o
+
+.PHONY : src/Graphics/ImageLoader.o
+
+# target to build an object file
+src/Graphics/ImageLoader.cpp.o:
+	$(MAKE) -f CMakeFiles/iona.dir/build.make CMakeFiles/iona.dir/src/Graphics/ImageLoader.cpp.o
+.PHONY : src/Graphics/ImageLoader.cpp.o
+
+src/Graphics/ImageLoader.i: src/Graphics/ImageLoader.cpp.i
+
+.PHONY : src/Graphics/ImageLoader.i
+
+# target to preprocess a source file
+src/Graphics/ImageLoader.cpp.i:
+	$(MAKE) -f CMakeFiles/iona.dir/build.make CMakeFiles/iona.dir/src/Graphics/ImageLoader.cpp.i
+.PHONY : src/Graphics/ImageLoader.cpp.i
+
+src/Graphics/ImageLoader.s: src/Graphics/ImageLoader.cpp.s
+
+.PHONY : src/Graphics/ImageLoader.s
+
+# target to generate assembly for a file
+src/Graphics/ImageLoader.cpp.s:
+	$(MAKE) -f CMakeFiles/iona.dir/build.make CMakeFiles/iona.dir/src/Graphics/ImageLoader.cpp.s
+.PHONY : src/Graphics/ImageLoader.cpp.s
+
+src/Graphics/VertexList.o: src/Graphics/VertexList.cpp.o
+
+.PHONY : src/Graphics/VertexList.o
+
+# target to build an object file
+src/Graphics/VertexList.cpp.o:
+	$(MAKE) -f CMakeFiles/iona.dir/build.make CMakeFiles/iona.dir/src/Graphics/VertexList.cpp.o
+.PHONY : src/Graphics/VertexList.cpp.o
+
+src/Graphics/VertexList.i: src/Graphics/VertexList.cpp.i
+
+.PHONY : src/Graphics/VertexList.i
+
+# target to preprocess a source file
+src/Graphics/VertexList.cpp.i:
+	$(MAKE) -f CMakeFiles/iona.dir/build.make CMakeFiles/iona.dir/src/Graphics/VertexList.cpp.i
+.PHONY : src/Graphics/VertexList.cpp.i
+
+src/Graphics/VertexList.s: src/Graphics/VertexList.cpp.s
+
+.PHONY : src/Graphics/VertexList.s
+
+# target to generate assembly for a file
+src/Graphics/VertexList.cpp.s:
+	$(MAKE) -f CMakeFiles/iona.dir/build.make CMakeFiles/iona.dir/src/Graphics/VertexList.cpp.s
+.PHONY : src/Graphics/VertexList.cpp.s
+
 src/Graphics/Vulkan/Helpers/CommandBuffer.o: src/Graphics/Vulkan/Helpers/CommandBuffer.cpp.o
 
 .PHONY : src/Graphics/Vulkan/Helpers/CommandBuffer.o
@@ -257,6 +338,33 @@ src/Graphics/Vulkan/Helpers/QueueFamilies.s: src/Graphics/Vulkan/Helpers/QueueFa
 src/Graphics/Vulkan/Helpers/QueueFamilies.cpp.s:
 	$(MAKE) -f CMakeFiles/iona.dir/build.make CMakeFiles/iona.dir/src/Graphics/Vulkan/Helpers/QueueFamilies.cpp.s
 .PHONY : src/Graphics/Vulkan/Helpers/QueueFamilies.cpp.s
+
+src/Graphics/Vulkan/Helpers/Transfer.o: src/Graphics/Vulkan/Helpers/Transfer.cpp.o
+
+.PHONY : src/Graphics/Vulkan/Helpers/Transfer.o
+
+# target to build an object file
+src/Graphics/Vulkan/Helpers/Transfer.cpp.o:
+	$(MAKE) -f CMakeFiles/iona.dir/build.make CMakeFiles/iona.dir/src/Graphics/Vulkan/Helpers/Transfer.cpp.o
+.PHONY : src/Graphics/Vulkan/Helpers/Transfer.cpp.o
+
+src/Graphics/Vulkan/Helpers/Transfer.i: src/Graphics/Vulkan/Helpers/Transfer.cpp.i
+
+.PHONY : src/Graphics/Vulkan/Helpers/Transfer.i
+
+# target to preprocess a source file
+src/Graphics/Vulkan/Helpers/Transfer.cpp.i:
+	$(MAKE) -f CMakeFiles/iona.dir/build.make CMakeFiles/iona.dir/src/Graphics/Vulkan/Helpers/Transfer.cpp.i
+.PHONY : src/Graphics/Vulkan/Helpers/Transfer.cpp.i
+
+src/Graphics/Vulkan/Helpers/Transfer.s: src/Graphics/Vulkan/Helpers/Transfer.cpp.s
+
+.PHONY : src/Graphics/Vulkan/Helpers/Transfer.s
+
+# target to generate assembly for a file
+src/Graphics/Vulkan/Helpers/Transfer.cpp.s:
+	$(MAKE) -f CMakeFiles/iona.dir/build.make CMakeFiles/iona.dir/src/Graphics/Vulkan/Helpers/Transfer.cpp.s
+.PHONY : src/Graphics/Vulkan/Helpers/Transfer.cpp.s
 
 src/Graphics/Vulkan/Image.o: src/Graphics/Vulkan/Image.cpp.o
 
@@ -339,6 +447,33 @@ src/Graphics/Vulkan/RNInit.cpp.s:
 	$(MAKE) -f CMakeFiles/iona.dir/build.make CMakeFiles/iona.dir/src/Graphics/Vulkan/RNInit.cpp.s
 .PHONY : src/Graphics/Vulkan/RNInit.cpp.s
 
+src/Graphics/Vulkan/VertexBuffer.o: src/Graphics/Vulkan/VertexBuffer.cpp.o
+
+.PHONY : src/Graphics/Vulkan/VertexBuffer.o
+
+# target to build an object file
+src/Graphics/Vulkan/VertexBuffer.cpp.o:
+	$(MAKE) -f CMakeFiles/iona.dir/build.make CMakeFiles/iona.dir/src/Graphics/Vulkan/VertexBuffer.cpp.o
+.PHONY : src/Graphics/Vulkan/VertexBuffer.cpp.o
+
+src/Graphics/Vulkan/VertexBuffer.i: src/Graphics/Vulkan/VertexBuffer.cpp.i
+
+.PHONY : src/Graphics/Vulkan/VertexBuffer.i
+
+# target to preprocess a source file
+src/Graphics/Vulkan/VertexBuffer.cpp.i:
+	$(MAKE) -f CMakeFiles/iona.dir/build.make CMakeFiles/iona.dir/src/Graphics/Vulkan/VertexBuffer.cpp.i
+.PHONY : src/Graphics/Vulkan/VertexBuffer.cpp.i
+
+src/Graphics/Vulkan/VertexBuffer.s: src/Graphics/Vulkan/VertexBuffer.cpp.s
+
+.PHONY : src/Graphics/Vulkan/VertexBuffer.s
+
+# target to generate assembly for a file
+src/Graphics/Vulkan/VertexBuffer.cpp.s:
+	$(MAKE) -f CMakeFiles/iona.dir/build.make CMakeFiles/iona.dir/src/Graphics/Vulkan/VertexBuffer.cpp.s
+.PHONY : src/Graphics/Vulkan/VertexBuffer.cpp.s
+
 src/Window/Window.o: src/Window/Window.cpp.o
 
 .PHONY : src/Window/Window.o
@@ -381,6 +516,15 @@ help:
 	@echo "... src/Exception/Exception.o"
 	@echo "... src/Exception/Exception.i"
 	@echo "... src/Exception/Exception.s"
+	@echo "... src/Generic/Iterator.o"
+	@echo "... src/Generic/Iterator.i"
+	@echo "... src/Generic/Iterator.s"
+	@echo "... src/Graphics/ImageLoader.o"
+	@echo "... src/Graphics/ImageLoader.i"
+	@echo "... src/Graphics/ImageLoader.s"
+	@echo "... src/Graphics/VertexList.o"
+	@echo "... src/Graphics/VertexList.i"
+	@echo "... src/Graphics/VertexList.s"
 	@echo "... src/Graphics/Vulkan/Helpers/CommandBuffer.o"
 	@echo "... src/Graphics/Vulkan/Helpers/CommandBuffer.i"
 	@echo "... src/Graphics/Vulkan/Helpers/CommandBuffer.s"
@@ -390,6 +534,9 @@ help:
 	@echo "... src/Graphics/Vulkan/Helpers/QueueFamilies.o"
 	@echo "... src/Graphics/Vulkan/Helpers/QueueFamilies.i"
 	@echo "... src/Graphics/Vulkan/Helpers/QueueFamilies.s"
+	@echo "... src/Graphics/Vulkan/Helpers/Transfer.o"
+	@echo "... src/Graphics/Vulkan/Helpers/Transfer.i"
+	@echo "... src/Graphics/Vulkan/Helpers/Transfer.s"
 	@echo "... src/Graphics/Vulkan/Image.o"
 	@echo "... src/Graphics/Vulkan/Image.i"
 	@echo "... src/Graphics/Vulkan/Image.s"
@@ -399,6 +546,9 @@ help:
 	@echo "... src/Graphics/Vulkan/RNInit.o"
 	@echo "... src/Graphics/Vulkan/RNInit.i"
 	@echo "... src/Graphics/Vulkan/RNInit.s"
+	@echo "... src/Graphics/Vulkan/VertexBuffer.o"
+	@echo "... src/Graphics/Vulkan/VertexBuffer.i"
+	@echo "... src/Graphics/Vulkan/VertexBuffer.s"
 	@echo "... src/Window/Window.o"
 	@echo "... src/Window/Window.i"
 	@echo "... src/Window/Window.s"

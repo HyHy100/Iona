@@ -7,7 +7,6 @@
 #include <Generic/Size.hpp>
 
 #if !defined(STB_IMAGE_IMPLEMENTATION)
-#define STB_IMAGE_IMPLEMENTATION
 #include <stb_image.h>
 #endif
 
@@ -50,7 +49,7 @@ namespace iona::priv {
             static_assert(std::is_same_v<T, PixelFormatRGBA>, "Only PixelFormatRGBA supported yet.");
             
             int w, h, ch;
-            stbi_uc* data = stbi_load(path.data(), &w, &h, &ch, 0);
+            stbi_uc* data = loadByFile(path.data(), w, h, ch);
 
             ImageInfo<T> info = {
                 .size = { static_cast<unsigned>(w), static_cast<unsigned>(h) },
@@ -68,5 +67,7 @@ namespace iona::priv {
         {
             stbi_image_free(reinterpret_cast<void*>(image.pixels));
         }
+    private:
+        stbi_uc* loadByFile(const std::string_view path, int& w, int& h, int& ch);
     };
 }

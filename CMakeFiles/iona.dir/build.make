@@ -153,9 +153,81 @@ CMakeFiles/iona.dir/src/Graphics/Vulkan/RNInit.cpp.o.provides: CMakeFiles/iona.d
 CMakeFiles/iona.dir/src/Graphics/Vulkan/RNInit.cpp.o.provides.build: CMakeFiles/iona.dir/src/Graphics/Vulkan/RNInit.cpp.o
 
 
+CMakeFiles/iona.dir/src/Graphics/Vulkan/VertexBuffer.cpp.o: CMakeFiles/iona.dir/flags.make
+CMakeFiles/iona.dir/src/Graphics/Vulkan/VertexBuffer.cpp.o: src/Graphics/Vulkan/VertexBuffer.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/hyreos/Documentos/git/my/Iona/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/iona.dir/src/Graphics/Vulkan/VertexBuffer.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/iona.dir/src/Graphics/Vulkan/VertexBuffer.cpp.o -c /home/hyreos/Documentos/git/my/Iona/src/Graphics/Vulkan/VertexBuffer.cpp
+
+CMakeFiles/iona.dir/src/Graphics/Vulkan/VertexBuffer.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/iona.dir/src/Graphics/Vulkan/VertexBuffer.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/hyreos/Documentos/git/my/Iona/src/Graphics/Vulkan/VertexBuffer.cpp > CMakeFiles/iona.dir/src/Graphics/Vulkan/VertexBuffer.cpp.i
+
+CMakeFiles/iona.dir/src/Graphics/Vulkan/VertexBuffer.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/iona.dir/src/Graphics/Vulkan/VertexBuffer.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/hyreos/Documentos/git/my/Iona/src/Graphics/Vulkan/VertexBuffer.cpp -o CMakeFiles/iona.dir/src/Graphics/Vulkan/VertexBuffer.cpp.s
+
+CMakeFiles/iona.dir/src/Graphics/Vulkan/VertexBuffer.cpp.o.requires:
+
+.PHONY : CMakeFiles/iona.dir/src/Graphics/Vulkan/VertexBuffer.cpp.o.requires
+
+CMakeFiles/iona.dir/src/Graphics/Vulkan/VertexBuffer.cpp.o.provides: CMakeFiles/iona.dir/src/Graphics/Vulkan/VertexBuffer.cpp.o.requires
+	$(MAKE) -f CMakeFiles/iona.dir/build.make CMakeFiles/iona.dir/src/Graphics/Vulkan/VertexBuffer.cpp.o.provides.build
+.PHONY : CMakeFiles/iona.dir/src/Graphics/Vulkan/VertexBuffer.cpp.o.provides
+
+CMakeFiles/iona.dir/src/Graphics/Vulkan/VertexBuffer.cpp.o.provides.build: CMakeFiles/iona.dir/src/Graphics/Vulkan/VertexBuffer.cpp.o
+
+
+CMakeFiles/iona.dir/src/Graphics/ImageLoader.cpp.o: CMakeFiles/iona.dir/flags.make
+CMakeFiles/iona.dir/src/Graphics/ImageLoader.cpp.o: src/Graphics/ImageLoader.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/hyreos/Documentos/git/my/Iona/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/iona.dir/src/Graphics/ImageLoader.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/iona.dir/src/Graphics/ImageLoader.cpp.o -c /home/hyreos/Documentos/git/my/Iona/src/Graphics/ImageLoader.cpp
+
+CMakeFiles/iona.dir/src/Graphics/ImageLoader.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/iona.dir/src/Graphics/ImageLoader.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/hyreos/Documentos/git/my/Iona/src/Graphics/ImageLoader.cpp > CMakeFiles/iona.dir/src/Graphics/ImageLoader.cpp.i
+
+CMakeFiles/iona.dir/src/Graphics/ImageLoader.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/iona.dir/src/Graphics/ImageLoader.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/hyreos/Documentos/git/my/Iona/src/Graphics/ImageLoader.cpp -o CMakeFiles/iona.dir/src/Graphics/ImageLoader.cpp.s
+
+CMakeFiles/iona.dir/src/Graphics/ImageLoader.cpp.o.requires:
+
+.PHONY : CMakeFiles/iona.dir/src/Graphics/ImageLoader.cpp.o.requires
+
+CMakeFiles/iona.dir/src/Graphics/ImageLoader.cpp.o.provides: CMakeFiles/iona.dir/src/Graphics/ImageLoader.cpp.o.requires
+	$(MAKE) -f CMakeFiles/iona.dir/build.make CMakeFiles/iona.dir/src/Graphics/ImageLoader.cpp.o.provides.build
+.PHONY : CMakeFiles/iona.dir/src/Graphics/ImageLoader.cpp.o.provides
+
+CMakeFiles/iona.dir/src/Graphics/ImageLoader.cpp.o.provides.build: CMakeFiles/iona.dir/src/Graphics/ImageLoader.cpp.o
+
+
+CMakeFiles/iona.dir/src/Graphics/VertexList.cpp.o: CMakeFiles/iona.dir/flags.make
+CMakeFiles/iona.dir/src/Graphics/VertexList.cpp.o: src/Graphics/VertexList.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/hyreos/Documentos/git/my/Iona/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/iona.dir/src/Graphics/VertexList.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/iona.dir/src/Graphics/VertexList.cpp.o -c /home/hyreos/Documentos/git/my/Iona/src/Graphics/VertexList.cpp
+
+CMakeFiles/iona.dir/src/Graphics/VertexList.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/iona.dir/src/Graphics/VertexList.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/hyreos/Documentos/git/my/Iona/src/Graphics/VertexList.cpp > CMakeFiles/iona.dir/src/Graphics/VertexList.cpp.i
+
+CMakeFiles/iona.dir/src/Graphics/VertexList.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/iona.dir/src/Graphics/VertexList.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/hyreos/Documentos/git/my/Iona/src/Graphics/VertexList.cpp -o CMakeFiles/iona.dir/src/Graphics/VertexList.cpp.s
+
+CMakeFiles/iona.dir/src/Graphics/VertexList.cpp.o.requires:
+
+.PHONY : CMakeFiles/iona.dir/src/Graphics/VertexList.cpp.o.requires
+
+CMakeFiles/iona.dir/src/Graphics/VertexList.cpp.o.provides: CMakeFiles/iona.dir/src/Graphics/VertexList.cpp.o.requires
+	$(MAKE) -f CMakeFiles/iona.dir/build.make CMakeFiles/iona.dir/src/Graphics/VertexList.cpp.o.provides.build
+.PHONY : CMakeFiles/iona.dir/src/Graphics/VertexList.cpp.o.provides
+
+CMakeFiles/iona.dir/src/Graphics/VertexList.cpp.o.provides.build: CMakeFiles/iona.dir/src/Graphics/VertexList.cpp.o
+
+
 CMakeFiles/iona.dir/src/Exception/Exception.cpp.o: CMakeFiles/iona.dir/flags.make
 CMakeFiles/iona.dir/src/Exception/Exception.cpp.o: src/Exception/Exception.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/hyreos/Documentos/git/my/Iona/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/iona.dir/src/Exception/Exception.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/hyreos/Documentos/git/my/Iona/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/iona.dir/src/Exception/Exception.cpp.o"
 	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/iona.dir/src/Exception/Exception.cpp.o -c /home/hyreos/Documentos/git/my/Iona/src/Exception/Exception.cpp
 
 CMakeFiles/iona.dir/src/Exception/Exception.cpp.i: cmake_force
@@ -177,9 +249,33 @@ CMakeFiles/iona.dir/src/Exception/Exception.cpp.o.provides: CMakeFiles/iona.dir/
 CMakeFiles/iona.dir/src/Exception/Exception.cpp.o.provides.build: CMakeFiles/iona.dir/src/Exception/Exception.cpp.o
 
 
+CMakeFiles/iona.dir/src/Generic/Iterator.cpp.o: CMakeFiles/iona.dir/flags.make
+CMakeFiles/iona.dir/src/Generic/Iterator.cpp.o: src/Generic/Iterator.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/hyreos/Documentos/git/my/Iona/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building CXX object CMakeFiles/iona.dir/src/Generic/Iterator.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/iona.dir/src/Generic/Iterator.cpp.o -c /home/hyreos/Documentos/git/my/Iona/src/Generic/Iterator.cpp
+
+CMakeFiles/iona.dir/src/Generic/Iterator.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/iona.dir/src/Generic/Iterator.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/hyreos/Documentos/git/my/Iona/src/Generic/Iterator.cpp > CMakeFiles/iona.dir/src/Generic/Iterator.cpp.i
+
+CMakeFiles/iona.dir/src/Generic/Iterator.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/iona.dir/src/Generic/Iterator.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/hyreos/Documentos/git/my/Iona/src/Generic/Iterator.cpp -o CMakeFiles/iona.dir/src/Generic/Iterator.cpp.s
+
+CMakeFiles/iona.dir/src/Generic/Iterator.cpp.o.requires:
+
+.PHONY : CMakeFiles/iona.dir/src/Generic/Iterator.cpp.o.requires
+
+CMakeFiles/iona.dir/src/Generic/Iterator.cpp.o.provides: CMakeFiles/iona.dir/src/Generic/Iterator.cpp.o.requires
+	$(MAKE) -f CMakeFiles/iona.dir/build.make CMakeFiles/iona.dir/src/Generic/Iterator.cpp.o.provides.build
+.PHONY : CMakeFiles/iona.dir/src/Generic/Iterator.cpp.o.provides
+
+CMakeFiles/iona.dir/src/Generic/Iterator.cpp.o.provides.build: CMakeFiles/iona.dir/src/Generic/Iterator.cpp.o
+
+
 CMakeFiles/iona.dir/src/Graphics/Vulkan/Helpers/CommandBuffer.cpp.o: CMakeFiles/iona.dir/flags.make
 CMakeFiles/iona.dir/src/Graphics/Vulkan/Helpers/CommandBuffer.cpp.o: src/Graphics/Vulkan/Helpers/CommandBuffer.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/hyreos/Documentos/git/my/Iona/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/iona.dir/src/Graphics/Vulkan/Helpers/CommandBuffer.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/hyreos/Documentos/git/my/Iona/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building CXX object CMakeFiles/iona.dir/src/Graphics/Vulkan/Helpers/CommandBuffer.cpp.o"
 	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/iona.dir/src/Graphics/Vulkan/Helpers/CommandBuffer.cpp.o -c /home/hyreos/Documentos/git/my/Iona/src/Graphics/Vulkan/Helpers/CommandBuffer.cpp
 
 CMakeFiles/iona.dir/src/Graphics/Vulkan/Helpers/CommandBuffer.cpp.i: cmake_force
@@ -203,7 +299,7 @@ CMakeFiles/iona.dir/src/Graphics/Vulkan/Helpers/CommandBuffer.cpp.o.provides.bui
 
 CMakeFiles/iona.dir/src/Graphics/Vulkan/Helpers/Memory.cpp.o: CMakeFiles/iona.dir/flags.make
 CMakeFiles/iona.dir/src/Graphics/Vulkan/Helpers/Memory.cpp.o: src/Graphics/Vulkan/Helpers/Memory.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/hyreos/Documentos/git/my/Iona/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/iona.dir/src/Graphics/Vulkan/Helpers/Memory.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/hyreos/Documentos/git/my/Iona/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Building CXX object CMakeFiles/iona.dir/src/Graphics/Vulkan/Helpers/Memory.cpp.o"
 	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/iona.dir/src/Graphics/Vulkan/Helpers/Memory.cpp.o -c /home/hyreos/Documentos/git/my/Iona/src/Graphics/Vulkan/Helpers/Memory.cpp
 
 CMakeFiles/iona.dir/src/Graphics/Vulkan/Helpers/Memory.cpp.i: cmake_force
@@ -227,7 +323,7 @@ CMakeFiles/iona.dir/src/Graphics/Vulkan/Helpers/Memory.cpp.o.provides.build: CMa
 
 CMakeFiles/iona.dir/src/Graphics/Vulkan/Helpers/QueueFamilies.cpp.o: CMakeFiles/iona.dir/flags.make
 CMakeFiles/iona.dir/src/Graphics/Vulkan/Helpers/QueueFamilies.cpp.o: src/Graphics/Vulkan/Helpers/QueueFamilies.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/hyreos/Documentos/git/my/Iona/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/iona.dir/src/Graphics/Vulkan/Helpers/QueueFamilies.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/hyreos/Documentos/git/my/Iona/CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Building CXX object CMakeFiles/iona.dir/src/Graphics/Vulkan/Helpers/QueueFamilies.cpp.o"
 	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/iona.dir/src/Graphics/Vulkan/Helpers/QueueFamilies.cpp.o -c /home/hyreos/Documentos/git/my/Iona/src/Graphics/Vulkan/Helpers/QueueFamilies.cpp
 
 CMakeFiles/iona.dir/src/Graphics/Vulkan/Helpers/QueueFamilies.cpp.i: cmake_force
@@ -249,9 +345,33 @@ CMakeFiles/iona.dir/src/Graphics/Vulkan/Helpers/QueueFamilies.cpp.o.provides: CM
 CMakeFiles/iona.dir/src/Graphics/Vulkan/Helpers/QueueFamilies.cpp.o.provides.build: CMakeFiles/iona.dir/src/Graphics/Vulkan/Helpers/QueueFamilies.cpp.o
 
 
+CMakeFiles/iona.dir/src/Graphics/Vulkan/Helpers/Transfer.cpp.o: CMakeFiles/iona.dir/flags.make
+CMakeFiles/iona.dir/src/Graphics/Vulkan/Helpers/Transfer.cpp.o: src/Graphics/Vulkan/Helpers/Transfer.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/hyreos/Documentos/git/my/Iona/CMakeFiles --progress-num=$(CMAKE_PROGRESS_13) "Building CXX object CMakeFiles/iona.dir/src/Graphics/Vulkan/Helpers/Transfer.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/iona.dir/src/Graphics/Vulkan/Helpers/Transfer.cpp.o -c /home/hyreos/Documentos/git/my/Iona/src/Graphics/Vulkan/Helpers/Transfer.cpp
+
+CMakeFiles/iona.dir/src/Graphics/Vulkan/Helpers/Transfer.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/iona.dir/src/Graphics/Vulkan/Helpers/Transfer.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/hyreos/Documentos/git/my/Iona/src/Graphics/Vulkan/Helpers/Transfer.cpp > CMakeFiles/iona.dir/src/Graphics/Vulkan/Helpers/Transfer.cpp.i
+
+CMakeFiles/iona.dir/src/Graphics/Vulkan/Helpers/Transfer.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/iona.dir/src/Graphics/Vulkan/Helpers/Transfer.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/hyreos/Documentos/git/my/Iona/src/Graphics/Vulkan/Helpers/Transfer.cpp -o CMakeFiles/iona.dir/src/Graphics/Vulkan/Helpers/Transfer.cpp.s
+
+CMakeFiles/iona.dir/src/Graphics/Vulkan/Helpers/Transfer.cpp.o.requires:
+
+.PHONY : CMakeFiles/iona.dir/src/Graphics/Vulkan/Helpers/Transfer.cpp.o.requires
+
+CMakeFiles/iona.dir/src/Graphics/Vulkan/Helpers/Transfer.cpp.o.provides: CMakeFiles/iona.dir/src/Graphics/Vulkan/Helpers/Transfer.cpp.o.requires
+	$(MAKE) -f CMakeFiles/iona.dir/build.make CMakeFiles/iona.dir/src/Graphics/Vulkan/Helpers/Transfer.cpp.o.provides.build
+.PHONY : CMakeFiles/iona.dir/src/Graphics/Vulkan/Helpers/Transfer.cpp.o.provides
+
+CMakeFiles/iona.dir/src/Graphics/Vulkan/Helpers/Transfer.cpp.o.provides.build: CMakeFiles/iona.dir/src/Graphics/Vulkan/Helpers/Transfer.cpp.o
+
+
 CMakeFiles/iona.dir/iona.cpp.o: CMakeFiles/iona.dir/flags.make
 CMakeFiles/iona.dir/iona.cpp.o: iona.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/hyreos/Documentos/git/my/Iona/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building CXX object CMakeFiles/iona.dir/iona.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/hyreos/Documentos/git/my/Iona/CMakeFiles --progress-num=$(CMAKE_PROGRESS_14) "Building CXX object CMakeFiles/iona.dir/iona.cpp.o"
 	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/iona.dir/iona.cpp.o -c /home/hyreos/Documentos/git/my/Iona/iona.cpp
 
 CMakeFiles/iona.dir/iona.cpp.i: cmake_force
@@ -279,10 +399,15 @@ iona_OBJECTS = \
 "CMakeFiles/iona.dir/src/Graphics/Vulkan/Image.cpp.o" \
 "CMakeFiles/iona.dir/src/Graphics/Vulkan/Pipeline.cpp.o" \
 "CMakeFiles/iona.dir/src/Graphics/Vulkan/RNInit.cpp.o" \
+"CMakeFiles/iona.dir/src/Graphics/Vulkan/VertexBuffer.cpp.o" \
+"CMakeFiles/iona.dir/src/Graphics/ImageLoader.cpp.o" \
+"CMakeFiles/iona.dir/src/Graphics/VertexList.cpp.o" \
 "CMakeFiles/iona.dir/src/Exception/Exception.cpp.o" \
+"CMakeFiles/iona.dir/src/Generic/Iterator.cpp.o" \
 "CMakeFiles/iona.dir/src/Graphics/Vulkan/Helpers/CommandBuffer.cpp.o" \
 "CMakeFiles/iona.dir/src/Graphics/Vulkan/Helpers/Memory.cpp.o" \
 "CMakeFiles/iona.dir/src/Graphics/Vulkan/Helpers/QueueFamilies.cpp.o" \
+"CMakeFiles/iona.dir/src/Graphics/Vulkan/Helpers/Transfer.cpp.o" \
 "CMakeFiles/iona.dir/iona.cpp.o"
 
 # External object files for target iona
@@ -292,14 +417,19 @@ bin/iona: CMakeFiles/iona.dir/src/Window/Window.cpp.o
 bin/iona: CMakeFiles/iona.dir/src/Graphics/Vulkan/Image.cpp.o
 bin/iona: CMakeFiles/iona.dir/src/Graphics/Vulkan/Pipeline.cpp.o
 bin/iona: CMakeFiles/iona.dir/src/Graphics/Vulkan/RNInit.cpp.o
+bin/iona: CMakeFiles/iona.dir/src/Graphics/Vulkan/VertexBuffer.cpp.o
+bin/iona: CMakeFiles/iona.dir/src/Graphics/ImageLoader.cpp.o
+bin/iona: CMakeFiles/iona.dir/src/Graphics/VertexList.cpp.o
 bin/iona: CMakeFiles/iona.dir/src/Exception/Exception.cpp.o
+bin/iona: CMakeFiles/iona.dir/src/Generic/Iterator.cpp.o
 bin/iona: CMakeFiles/iona.dir/src/Graphics/Vulkan/Helpers/CommandBuffer.cpp.o
 bin/iona: CMakeFiles/iona.dir/src/Graphics/Vulkan/Helpers/Memory.cpp.o
 bin/iona: CMakeFiles/iona.dir/src/Graphics/Vulkan/Helpers/QueueFamilies.cpp.o
+bin/iona: CMakeFiles/iona.dir/src/Graphics/Vulkan/Helpers/Transfer.cpp.o
 bin/iona: CMakeFiles/iona.dir/iona.cpp.o
 bin/iona: CMakeFiles/iona.dir/build.make
 bin/iona: CMakeFiles/iona.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/hyreos/Documentos/git/my/Iona/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Linking CXX executable bin/iona"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/hyreos/Documentos/git/my/Iona/CMakeFiles --progress-num=$(CMAKE_PROGRESS_15) "Linking CXX executable bin/iona"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/iona.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
@@ -311,10 +441,15 @@ CMakeFiles/iona.dir/requires: CMakeFiles/iona.dir/src/Window/Window.cpp.o.requir
 CMakeFiles/iona.dir/requires: CMakeFiles/iona.dir/src/Graphics/Vulkan/Image.cpp.o.requires
 CMakeFiles/iona.dir/requires: CMakeFiles/iona.dir/src/Graphics/Vulkan/Pipeline.cpp.o.requires
 CMakeFiles/iona.dir/requires: CMakeFiles/iona.dir/src/Graphics/Vulkan/RNInit.cpp.o.requires
+CMakeFiles/iona.dir/requires: CMakeFiles/iona.dir/src/Graphics/Vulkan/VertexBuffer.cpp.o.requires
+CMakeFiles/iona.dir/requires: CMakeFiles/iona.dir/src/Graphics/ImageLoader.cpp.o.requires
+CMakeFiles/iona.dir/requires: CMakeFiles/iona.dir/src/Graphics/VertexList.cpp.o.requires
 CMakeFiles/iona.dir/requires: CMakeFiles/iona.dir/src/Exception/Exception.cpp.o.requires
+CMakeFiles/iona.dir/requires: CMakeFiles/iona.dir/src/Generic/Iterator.cpp.o.requires
 CMakeFiles/iona.dir/requires: CMakeFiles/iona.dir/src/Graphics/Vulkan/Helpers/CommandBuffer.cpp.o.requires
 CMakeFiles/iona.dir/requires: CMakeFiles/iona.dir/src/Graphics/Vulkan/Helpers/Memory.cpp.o.requires
 CMakeFiles/iona.dir/requires: CMakeFiles/iona.dir/src/Graphics/Vulkan/Helpers/QueueFamilies.cpp.o.requires
+CMakeFiles/iona.dir/requires: CMakeFiles/iona.dir/src/Graphics/Vulkan/Helpers/Transfer.cpp.o.requires
 CMakeFiles/iona.dir/requires: CMakeFiles/iona.dir/iona.cpp.o.requires
 
 .PHONY : CMakeFiles/iona.dir/requires

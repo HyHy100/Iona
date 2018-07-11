@@ -300,7 +300,5 @@ namespace iona {
 		);
 
 		priv::VKInfo::graphicsQueue.presentKHR(presentInfo);
-
-		priv::VKInfo::device.waitIdle();
 	}
 }

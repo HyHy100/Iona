@@ -1,0 +1,1 @@
+Tem um erro na hora de desenhar a textura com um vertexBuffer, se usar valores "inline" no shader talvez funcione.

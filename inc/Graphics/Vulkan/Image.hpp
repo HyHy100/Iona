@@ -15,27 +15,7 @@
 #include <Graphics/Vulkan/VkBase.hpp>
 #include <Graphics/Types.hpp>
 #include <Graphics/Pixel.hpp>
-
-namespace iona::priv {
-    void copyBufferToBuffer(const vk::Buffer& srcBuffer, 
-                                    vk::Buffer& dstBuffer, 
-                                    vk::DeviceSize size);
-
-
-    void copyBufferToImage(vk::Buffer src, 
-                                    vk::Image dst, 
-                                    SizeUint size);
-
-    void layout2layout(const vk::Image& image, 
-                                vk::Format format, 
-                                vk::ImageLayout oldLayout, 
-                                vk::ImageLayout newLayout);
-
-    void uploadContentToMemory(const std::string_view path, 
-                                        const vk::DeviceMemory& memory, 
-                                        SizeUint imageSize, 
-                                        const PixelFormatRGBA* const data);
-}
+#include <Graphics/Vulkan/Helpers/Transfer.hpp>
 
 namespace iona {
     class Texture : priv::VkBase {

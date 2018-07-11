@@ -1,4 +1,5 @@
 #include <Graphics/Vulkan/Pipeline.hpp>
+#include <Graphics/Vertex.hpp>
 #include <Graphics/Vulkan/Helpers/CommandBuffer.hpp>
 #include <Exception/Exception.hpp>
 
@@ -15,7 +16,7 @@ namespace iona {
 
             std::ifstream file(vertex.data(), std::ios::binary | std::ios::ate);
 
-            assert(file && "no file found");
+            assert(file && "no file found.");
 
             std::size_t sz = file.tellg();
 
@@ -39,7 +40,7 @@ namespace iona {
 
             std::ifstream file(fragment.data(), std::ios::binary | std::ios::ate);
 
-            assert(file && "no file found");
+            assert(file && "no file found.");
 
             std::size_t sz = file.tellg();
 
@@ -63,11 +64,14 @@ namespace iona {
             vk::PipelineShaderStageCreateInfo(vk::PipelineShaderStageCreateFlags(), vk::ShaderStageFlagBits::eFragment, fragmentModule, "main")
         };
 
+        auto bDescription = Vertex::getBindingDescription();
+        auto attrDescription = Vertex::getAttributeDescription();
+
         auto vertexInput = vk::PipelineVertexInputStateCreateInfo(vk::PipelineVertexInputStateCreateFlags(),
-            0,
-            nullptr,
-            0,
-            nullptr
+            1U,
+            &bDescription,
+            Vertex::AttributeNumber,
+            attrDescription.data()
         );
 
         auto assembly = vk::PipelineInputAssemblyStateCreateInfo(vk::PipelineInputAssemblyStateCreateFlags(),
