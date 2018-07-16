@@ -2,19 +2,36 @@
 
 #include <vulkan/vulkan.hpp>
 #include <vector>
-#include <atomic>
 
 namespace iona::priv {
-	class VKInfo {
+	class VkEnv
+	{
 	public:
-		static inline vk::Instance instance;
-		static inline vk::Device device;
-		static inline vk::PhysicalDevice phyDevice;
+		static inline struct 
+		{
+			vk::Device logical;
+			vk::PhysicalDevice physical;
+		} device;
+
+		static inline struct
+		{
+			vk::Queue graphics;
+		} queues;
+
+		static inline struct
+		{
+			vk::CommandPool pool;
+			std::vector<vk::CommandBuffer> buffers;
+			vk::CommandBuffer currentBuffer;
+		} commands;
+
+		static inline struct
+		{
+			vk::DescriptorPool pool;
+		} descriptors;
+		
 		static inline vk::RenderPass renderPass;
-		static inline vk::CommandPool commandPool;
-		static inline std::vector<vk::CommandBuffer> commandBuffers;
-		static inline vk::CommandBuffer currentCommandBuffer;
-		static inline vk::Queue graphicsQueue;
-		static inline vk::DescriptorPool descPool;
+
+		static inline vk::Instance instance;
 	};
 }

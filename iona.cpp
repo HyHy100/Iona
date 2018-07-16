@@ -3,10 +3,14 @@
 #include <thread>
 #include <chrono>
 
+#include <iostream>
+
 int main()
 {
-	iona::Window window(iona::SizeUint(800, 800), "MIWA VULKAN EDITION");
+	iona::Window window(iona::SizeUint(800, 800), "Engine V0.0.1 Vulkan");
     
+    iona::Texture tex("aa.png");
+ 
     bool s = false;
 
     iona::StaticVertexList<4> vlist {{
@@ -18,28 +22,30 @@ int main()
 
     iona::VertexBuffer vb(vlist);
 
-    while (window.pollEvents()) {    
-        window.begin();
+    while (window.pollEvents()) {
+        std::cout << "loop..." << std::endl;
+
+        tex.bind();
+
+        std::cout << "wwwa..." << std::endl;
         
-        assert(iona::priv::VKInfo::currentCommandBuffer);
+        assert(iona::priv::VkEnv::commands.currentBuffer);
         
-        iona::priv::VKInfo::currentCommandBuffer.bindVertexBuffers(
+        iona::priv::VkEnv::commands.currentBuffer.bindVertexBuffers(
             0U,
             { 
-                vb.getBuffer() 
+                vb.getBuffer()
             }, 
             { 
                 0U 
             }
         );
 
-        iona::priv::VKInfo::currentCommandBuffer.draw(4U, 1U, 0U, 0U);
-        
-        window.end();
-        
+        iona::priv::VkEnv::commands.currentBuffer.draw(4U, 1U, 0U, 0U);
+                
         window.present();
-        
-        std::this_thread::sleep_for(std::chrono::milliseconds(1000U/60U));
+
+        std::cout << "loop2..." << std::endl;
     }
 
     return 0;

@@ -1,10 +1,10 @@
 #include <Graphics/Vulkan/Helpers/CommandBuffer.hpp>
 
 namespace iona::priv {
-    vk::CommandBuffer beginTempCommandBuffer() 
+    vk::CommandBuffer beginTempCommandBuffer()
     {
-        vk::CommandBuffer cmdbf = VKInfo::device.allocateCommandBuffers(vk::CommandBufferAllocateInfo(
-            priv::VKInfo::commandPool,
+        vk::CommandBuffer cmdbf = VkEnv::device.logical.allocateCommandBuffers(vk::CommandBufferAllocateInfo(
+            priv::VkEnv::commands.pool,
             vk::CommandBufferLevel::ePrimary,
             1U
         )).front();
@@ -16,13 +16,15 @@ namespace iona::priv {
         return cmdbf;
     }
 
-    void endTempCommandBuffer(vk::CommandBuffer& cmdbf) 
+    void endTempCommandBuffer(vk::CommandBuffer& cmdbf)
     {
         cmdbf.end();
 
-        auto fence = priv::VKInfo::device.createFence(vk::FenceCreateInfo());
+        auto fence = priv::VkEnv::device.logical.createFence(
+            vk::FenceCreateInfo()
+        );
 
-        priv::VKInfo::graphicsQueue.submit(vk::SubmitInfo(
+        priv::VkEnv::queues.graphics.submit(vk::SubmitInfo(
             0U,
             nullptr,
             nullptr,
@@ -32,10 +34,8 @@ namespace iona::priv {
             nullptr
         ), fence);
 
-        priv::VKInfo::device.waitForFences(fence, VK_TRUE, std::numeric_limits<uint16_t>::max());
+        priv::VkEnv::device.logical.waitForFences(fence, VK_TRUE, std::numeric_limits<std::size_t>::max());
 
-        priv::VKInfo::device.destroyFence(fence);
-
-        priv::VKInfo::device.freeCommandBuffers(priv::VKInfo::commandPool, cmdbf);
+        priv::VkEnv::device.logical.freeCommandBuffers(priv::VkEnv::commands.pool, cmdbf);
     }
 }

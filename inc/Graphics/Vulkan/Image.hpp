@@ -18,7 +18,8 @@
 #include <Graphics/Vulkan/Helpers/Transfer.hpp>
 
 namespace iona {
-    class Texture : priv::VkBase {
+    class Texture
+    {
     public:
         Texture(const std::string_view path);
 

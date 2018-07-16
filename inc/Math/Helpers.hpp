@@ -8,14 +8,14 @@
 namespace iona::priv 
 {
     template<typename T>
-    class MultiArrayIterator 
+    class CArrayIterator 
     {
         public:
-            explicit MultiArrayIterator(const T* v) noexcept : data_(v) 
+            explicit CArrayIterator(const T* v) noexcept : data_(v) 
             {
             }
 
-            MultiArrayIterator(const MultiArrayIterator& iterator) 
+            CArrayIterator(const CArrayIterator& iterator) 
             {
                 iterator.data_ = data_;
             }
@@ -35,17 +35,17 @@ namespace iona::priv
                 ++data_;
             }
 
-            bool operator==(const MultiArrayIterator& iterator) noexcept 
+            bool operator==(const CArrayIterator& iterator) noexcept 
             {
                 return iterator.data_ == data_;
             }
 
-            bool operator<(const MultiArrayIterator& iterator) noexcept 
+            bool operator<(const CArrayIterator& iterator) noexcept 
             {
                 return data_ < iterator.data_;
             }
 
-            bool operator>(const MultiArrayIterator& iterator) noexcept 
+            bool operator>(const CArrayIterator& iterator) noexcept 
             {
                 return data_ > iterator.data_;
             }
@@ -54,11 +54,11 @@ namespace iona::priv
         };
 
     template<typename T, std::size_t M, std::size_t N>
-    class MultiArray {
+    class CMultiArray {
     public:
-        MultiArray() = default;
+        CMultiArray() = default;
 
-        explicit MultiArray(std::initializer_list<T> l) noexcept 
+        explicit CMultiArray(std::initializer_list<T> l) noexcept 
         {
             auto it = std::begin(l);
             std::size_t k{ 0u };
@@ -67,7 +67,7 @@ namespace iona::priv
                     data_[i][j] = *(it + k++);
         }
 
-        explicit MultiArray(std::array<std::array<T, M>, N> v) noexcept 
+        explicit CMultiArray(std::array<std::array<T, M>, N> v) noexcept 
         {
             for(auto i = 0u; i < M; ++i) {
                 for(auto j = 0u; j < N; ++j) {
@@ -87,12 +87,12 @@ namespace iona::priv
 
         constexpr auto begin() const 
         {
-            return MultiArrayIterator{ data_ };
+            return CArrayIterator{ data_ };
         }
 
         constexpr auto end() const 
         {
-            return MultiArrayIterator{ &data_[M][N] };
+            return CArrayIterator{ &data_[M][N] };
         }
 
         constexpr auto* data() noexcept
@@ -140,7 +140,7 @@ namespace iona::priv
 namespace std 
 {
     template<typename T>
-    struct iterator_traits<::iona::priv::MultiArrayIterator<T>> 
+    struct iterator_traits<::iona::priv::CArrayIterator<T>> 
     {
         using iterator_category = std::bidirectional_iterator_tag;
         using value_type = T&;

@@ -21,7 +21,7 @@ namespace iona
     class Matrix 
     {
     private:
-        priv::MultiArray<T, Collumns, Rows> data_;
+        priv::CMultiArray<T, Collumns, Rows> data_;
     public:
         template<
             typename ... Args

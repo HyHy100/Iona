@@ -25,21 +25,21 @@ namespace iona::priv {
     {
         static auto memLen = size;
 
-        static auto memory = priv::VKInfo::device.allocateMemory(
+        static auto memory = priv::VkEnv::device.logical.allocateMemory(
             vk::MemoryAllocateInfo(
                 size,
-                priv::getMemoryType(priv::VKInfo::phyDevice, 0U, vk::MemoryPropertyFlagBits::eHostVisible)
+                priv::getMemoryType(priv::VkEnv::device.physical, 0U, vk::MemoryPropertyFlagBits::eHostVisible)
             )
         );
 
         if (size > memLen)
         {
-            priv::VKInfo::device.freeMemory(memory);
+            priv::VkEnv::device.logical.freeMemory(memory);
 
-            memory = priv::VKInfo::device.allocateMemory(
+            memory = priv::VkEnv::device.logical.allocateMemory(
                 vk::MemoryAllocateInfo(
                     size, 
-                    priv::getMemoryType(priv::VKInfo::phyDevice, 0U, vk::MemoryPropertyFlagBits::eHostVisible)
+                    priv::getMemoryType(priv::VkEnv::device.physical, 0U, vk::MemoryPropertyFlagBits::eHostVisible)
                 )
             );
 

@@ -1,3 +1,5 @@
 #pragma once
 
-#include <Graphics/Vulkan/RNInit.hpp>
+#if !defined(IONA_OPENGL)
+    #include <Graphics/Vulkan/Graphics.hpp>
+#endif

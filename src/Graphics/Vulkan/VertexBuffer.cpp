@@ -12,12 +12,12 @@ namespace iona
     {
         if (!m_buffer)
         {
-            priv::VKInfo::device.destroyBuffer(m_buffer);
+            priv::VkEnv::device.logical.destroyBuffer(m_buffer);
         }
         
         if (!m_memory)
         {
-            priv::VKInfo::device.freeMemory(m_memory);
+            priv::VkEnv::device.logical.freeMemory(m_memory);
         }
     }
 }

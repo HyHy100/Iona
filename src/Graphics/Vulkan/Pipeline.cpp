@@ -1,22 +1,23 @@
 #include <Graphics/Vulkan/Pipeline.hpp>
 #include <Graphics/Vertex.hpp>
 #include <Graphics/Vulkan/Helpers/CommandBuffer.hpp>
-#include <Exception/Exception.hpp>
+
+#include <Exception/FileError.hpp>
+
+#include <Log/Logger.hpp>
 
 #include <iostream>
 #include <experimental/filesystem>
 
-namespace iona {
+namespace iona 
+{
     Shader::Shader(const std::string_view vertex, const std::string_view fragment) 
     {
         vk::ShaderModule fragmentModule, vertexModule;
         
+        if (std::ifstream file(vertex.data(), std::ios::binary | std::ios::ate); file)
         {
             std::vector<char> shaderData;
-
-            std::ifstream file(vertex.data(), std::ios::binary | std::ios::ate);
-
-            assert(file && "no file found.");
 
             std::size_t sz = file.tellg();
 
@@ -26,21 +27,25 @@ namespace iona {
 
             file.read(shaderData.data(), sz);
 
-            file.close();
-
-            vertexModule = priv::VKInfo::device.createShaderModule(vk::ShaderModuleCreateInfo(
+            vertexModule = priv::VkEnv::device.logical.createShaderModule(vk::ShaderModuleCreateInfo(
                 vk::ShaderModuleCreateFlags(),
                 shaderData.size(),
                 reinterpret_cast<uint32_t*>(shaderData.data())
             ));
+
+            file.close();
+        }
+        else 
+        {
+            Logger::get() << Logger::Output::Critical << "Vulkan::Shader::Vertex::Error: \"" << vertex.data() << "\" Fail on open vertex shader." << std::ends;
+            Logger::get().flush();
+
+            throw FileOpenException("Vulkan::Shader::Vertex::Error: Fail on open vertex shader.");
         }
 
+        if (std::ifstream file(fragment.data(), std::ios::binary | std::ios::ate); file)
         {
             std::vector<char> shaderData;
-
-            std::ifstream file(fragment.data(), std::ios::binary | std::ios::ate);
-
-            assert(file && "no file found.");
 
             std::size_t sz = file.tellg();
 
@@ -50,16 +55,23 @@ namespace iona {
 
             file.read(shaderData.data(), sz);
 
-            file.close();
-
-            fragmentModule = priv::VKInfo::device.createShaderModule(vk::ShaderModuleCreateInfo(
+            fragmentModule = priv::VkEnv::device.logical.createShaderModule(vk::ShaderModuleCreateInfo(
                 vk::ShaderModuleCreateFlags(),
                 shaderData.size(),
                 reinterpret_cast<uint32_t*>(shaderData.data())
             ));
+
+            file.close();
+        }
+        else
+        {
+            Logger::get() << Logger::Output::Critical << "Vulkan::Shader::Fragment::Error: \"" << vertex.data() << "\" Fail on open fragment shader." << std::ends;
+            Logger::get().flush();
+
+            throw FileOpenException("Vulkan::Shader::Fragment::Error: Fail on open fragment shader.");
         }
 
-        std::array<vk::PipelineShaderStageCreateInfo, 2> shaderStages { 
+        std::array<vk::PipelineShaderStageCreateInfo, 2> shaderStages {
             vk::PipelineShaderStageCreateInfo(vk::PipelineShaderStageCreateFlags(), vk::ShaderStageFlagBits::eVertex, vertexModule, "main"),
             vk::PipelineShaderStageCreateInfo(vk::PipelineShaderStageCreateFlags(), vk::ShaderStageFlagBits::eFragment, fragmentModule, "main")
         };
@@ -79,9 +91,16 @@ namespace iona {
             VK_FALSE
         );
 
-        std::array<vk::Viewport, 1> viewports { vk::Viewport(0.f, 0.f, 800.f, 800.f, 0.f, 1.f) };
+        std::array<vk::Viewport, 1> viewports {
+            vk::Viewport(0.f, 0.f, 800.f, 800.f, 0.f, 1.f) 
+        };
         
-        std::array<vk::Rect2D, 1> scissors { vk::Rect2D(vk::Offset2D(0, 0), vk::Extent2D(800, 800)) };
+        std::array<vk::Rect2D, 1> scissors { 
+            vk::Rect2D(
+                vk::Offset2D(0, 0), 
+                vk::Extent2D(800, 800)
+            ) 
+        };
 
         auto viewport = vk::PipelineViewportStateCreateInfo(vk::PipelineViewportStateCreateFlags(),
             viewports.size(),
@@ -126,7 +145,12 @@ namespace iona {
             vk::LogicOp::eCopy,
             attachs.size(),
             attachs.data(),
-            {{ 0.f, 0.f, 0.f, 0.f }}
+            {{ 
+                0.f, 
+                0.f, 
+                0.f, 
+                0.f 
+            }}
         );
 
         std::array<vk::DynamicState, 2u> dynStates {
@@ -140,18 +164,33 @@ namespace iona {
         );
 
         std::array<vk::DescriptorSetLayoutBinding, 1u> bindings {
-            vk::DescriptorSetLayoutBinding(1u, vk::DescriptorType::eCombinedImageSampler, 1u, vk::ShaderStageFlagBits::eFragment)
+            vk::DescriptorSetLayoutBinding( 
+                1u,
+                vk::DescriptorType::eCombinedImageSampler, 
+                1u, 
+                vk::ShaderStageFlagBits::eFragment 
+            )
         };
 
-        dl.at(0) =  priv::VKInfo::device.createDescriptorSetLayout(vk::DescriptorSetLayoutCreateInfo(
-                    vk::DescriptorSetLayoutCreateFlags(),
-                    bindings.size(),
-                    bindings.data()
-                ));
+        auto& descriptors = getDescriptors();
 
-        auto pipelineLayoutInfo = vk::PipelineLayoutCreateInfo(vk::PipelineLayoutCreateFlags(), dl.size(), dl.data());
+        descriptors.at(0) =  priv::VkEnv::device.logical.createDescriptorSetLayout(
+                        vk::DescriptorSetLayoutCreateInfo(
+                            vk::DescriptorSetLayoutCreateFlags(),
+                            bindings.size(),
+                            bindings.data()
+                        )
+                    );
 
-        m_layout = priv::VKInfo::device.createPipelineLayout(pipelineLayoutInfo);
+        auto pipelineLayoutInfo = vk::PipelineLayoutCreateInfo(
+            vk::PipelineLayoutCreateFlags(), 
+            descriptors.size(), 
+            descriptors.data()
+        );
+
+        auto& layout = getLayout();
+
+        layout = priv::VkEnv::device.logical.createPipelineLayout(pipelineLayoutInfo);
 
         auto pipelineInfo = vk::GraphicsPipelineCreateInfo(
             vk::PipelineCreateFlags(),
@@ -166,26 +205,28 @@ namespace iona {
             nullptr,
             &colorBlend,
             &dynState,
-            m_layout,
-            priv::VKInfo::renderPass
+            getLayout(),
+            priv::VkEnv::renderPass
         );
 
-        m_pipeline = priv::VKInfo::device.createGraphicsPipeline(vk::PipelineCache(), pipelineInfo);
+        auto& pipe = getPipeline();
 
-        priv::VKInfo::device.destroyShaderModule(fragmentModule);
+        pipe = priv::VkEnv::device.logical.createGraphicsPipeline(vk::PipelineCache(), pipelineInfo);
 
-        priv::VKInfo::device.destroyShaderModule(vertexModule);
+        priv::VkEnv::device.logical.destroyShaderModule(fragmentModule);
+
+        priv::VkEnv::device.logical.destroyShaderModule(vertexModule);
     }
 
     void Shader::bind() 
     {
-        priv::VKInfo::currentCommandBuffer.bindPipeline(vk::PipelineBindPoint::eGraphics, m_pipeline);
+        priv::VkEnv::commands.currentBuffer.bindPipeline(vk::PipelineBindPoint::eGraphics, getPipeline());
 
-        current = this;
+        m_current = this;
     }
 
     Shader::~Shader() 
     {
-        priv::VKInfo::device.destroyPipeline(m_pipeline);
+        priv::VkEnv::device.logical.destroyPipeline(getPipeline());
     }
 }

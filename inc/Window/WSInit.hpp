@@ -3,33 +3,21 @@
 #include <GLFW/glfw3.h>
 #include <Exception/Exception.hpp>
 
-#ifndef _WS_INIT_H
-#define _WS_INIT_H
-#endif
-
-namespace iona::priv {
-	class WSInit {
+namespace iona::priv 
+{
+	class WSLoader 
+	{
 	public:
-		~WSInit() = default;
+		~WSLoader() = default;
 	private:
-		WSInit() {
-			if (!glfwInit()) {
-				throw Exception("GLFW init fail");
-			}
-			else {
-				if (!glfwVulkanSupported()) {
-					throw Exception("Vulkan is not supported by GLFW3");
-				}
+		WSLoader()
+		{
+			if (!glfwInit())
+			{
+				throw Exception("GLFW init fail.");
 			}
 		}
 
-		friend class WSInitializerImpl;
-	};
-
-	class WSInitializerImpl {
-	public:
-		WSInitializerImpl() = delete;
-	private:
-		static inline WSInit impl;
+		friend class WSLoaderImpl;
 	};
 }

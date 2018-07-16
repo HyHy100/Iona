@@ -12,10 +12,14 @@
 #include <Graphics/Vulkan/Pipeline.hpp>
 #include <Graphics/Vulkan/Image.hpp>
 
-#include "WSInit.hpp"
+#include <Window/WSLoaderImpl.hpp>
 
-namespace iona {
-	class Window {
+#include <atomic>
+
+namespace iona 
+{
+	class Window 
+	{
 	public:
 		Window() = delete;
 
@@ -24,10 +28,6 @@ namespace iona {
 		Window(const Window&) = delete;
 
 		~Window();
-
-		void begin();
-
-		void end();
 
 		bool pollEvents();
 

@@ -13,9 +13,15 @@ thread
 -
 chrono
 -
+iostream
+-
 
 /home/hyreos/Documentos/git/my/Iona/src/Exception/Exception.cpp
 Exception/Exception.hpp
+-
+
+/home/hyreos/Documentos/git/my/Iona/src/Exception/FileError.cpp
+Exception/FileError.hpp
 -
 
 /home/hyreos/Documentos/git/my/Iona/src/Generic/Iterator.cpp
@@ -71,31 +77,13 @@ Graphics/Vertex.hpp
 -
 Graphics/Vulkan/Helpers/CommandBuffer.hpp
 -
-Exception/Exception.hpp
+Exception/FileError.hpp
+-
+Log/Logger.hpp
 -
 iostream
 -
 experimental/filesystem
--
-
-/home/hyreos/Documentos/git/my/Iona/src/Graphics/Vulkan/RNInit.cpp
-Graphics/Vulkan/RNInit.hpp
--
-Graphics/Vulkan/VKInfo.hpp
--
-Exception/Exception.hpp
--
-Graphics/Vulkan/Helpers/QueueFamilies.hpp
--
-GLFW/glfw3.h
--
-algorithm
--
-iostream
--
-iterator
--
-array
 -
 
 /home/hyreos/Documentos/git/my/Iona/src/Graphics/Vulkan/VertexBuffer.cpp
@@ -110,6 +98,32 @@ Graphics/Vulkan/VKInfo.hpp
 Graphics/Vertex.hpp
 -
 mutex
+-
+
+/home/hyreos/Documentos/git/my/Iona/src/Graphics/Vulkan/VkLoader.cpp
+algorithm
+-
+iostream
+-
+iterator
+-
+array
+-
+GLFW/glfw3.h
+-
+Graphics/Vulkan/VkLoader.hpp
+-
+Graphics/Vulkan/VKInfo.hpp
+-
+Exception/Exception.hpp
+-
+Graphics/Vulkan/Helpers/QueueFamilies.hpp
+-
+Log/Logger.hpp
+-
+
+/home/hyreos/Documentos/git/my/Iona/src/Log/Logger.cpp
+Log/Logger.hpp
 -
 
 /home/hyreos/Documentos/git/my/Iona/src/Window/Window.cpp
@@ -132,6 +146,10 @@ string
 string_view
 -
 
+inc/Exception/FileError.hpp
+Exception/Exception.hpp
+-
+
 inc/Generic/Iterator.hpp
 cstdint
 -
@@ -143,7 +161,7 @@ tuple
 -
 
 inc/Graphics/Graphics.hpp
-Graphics/Vulkan/RNInit.hpp
+Graphics/Vulkan/Graphics.hpp
 -
 
 inc/Graphics/ImageLoader.hpp
@@ -184,6 +202,16 @@ algorithm
 vector
 -
 iterator
+-
+
+inc/Graphics/Vulkan/Graphics.hpp
+Graphics/Vulkan/Image.hpp
+-
+Graphics/Vulkan/Pipeline.hpp
+-
+Graphics/Vulkan/VertexBuffer.hpp
+-
+Graphics/Vulkan/VkLoader.hpp
 -
 
 inc/Graphics/Vulkan/Helpers/CommandBuffer.hpp
@@ -267,15 +295,13 @@ array
 -
 algorithm
 -
-
-inc/Graphics/Vulkan/RNInit.hpp
+iostream
+-
 
 inc/Graphics/Vulkan/VKInfo.hpp
 vulkan/vulkan.hpp
 -
 vector
--
-atomic
 -
 
 inc/Graphics/Vulkan/VertexBuffer.hpp
@@ -294,6 +320,8 @@ Graphics/Vulkan/Helpers/Transfer.hpp
 
 inc/Graphics/Vulkan/VkBase.hpp
 
+inc/Graphics/Vulkan/VkLoader.hpp
+
 inc/Iona.hpp
 Exception/Exception.hpp
 inc/Exception/Exception.hpp
@@ -301,19 +329,25 @@ Generic/Size.hpp
 inc/Generic/Size.hpp
 Graphics/Graphics.hpp
 inc/Graphics/Graphics.hpp
-Graphics/Vulkan/RNInit.hpp
-inc/Graphics/Vulkan/RNInit.hpp
-Graphics/Vulkan/Image.hpp
-inc/Graphics/Vulkan/Image.hpp
 Window/Window.hpp
 inc/Window/Window.hpp
 Window/WSInit.hpp
 inc/Window/WSInit.hpp
-Graphics/VertexList.hpp
-inc/Graphics/VertexList.hpp
-Graphics/Vulkan/VertexBuffer.hpp
-inc/Graphics/Vulkan/VertexBuffer.hpp
 Math/Math.hpp
+-
+
+inc/Log/Logger.hpp
+string_view
+-
+sstream
+-
+fstream
+-
+chrono
+-
+ctime
+-
+Exception/FileError.hpp
 -
 
 inc/Math/Generic.hpp
@@ -382,6 +416,10 @@ GLFW/glfw3.h
 Exception/Exception.hpp
 -
 
+inc/Window/WSLoaderImpl.hpp
+Window/WSInit.hpp
+-
+
 inc/Window/Window.hpp
 string_view
 -
@@ -397,6 +435,8 @@ Graphics/Vulkan/Pipeline.hpp
 -
 Graphics/Vulkan/Image.hpp
 -
-WSInit.hpp
-inc/Window/WSInit.hpp
+Window/WSLoaderImpl.hpp
+-
+atomic
+-
 

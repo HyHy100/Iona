@@ -4,7 +4,8 @@
 #include <Graphics/ImageLoader.hpp>
 
 
-namespace iona::priv {
+namespace iona::priv 
+{
     void uploadContentToMemory(const std::string_view path, 
                                         const vk::DeviceMemory& memory, 
                                         SizeUint imageSize, 
@@ -14,18 +15,19 @@ namespace iona::priv {
 
         m_mapMutex.lock();
 
-        void *pMemory = priv::VKInfo::device.mapMemory(memory, 0U, VK_WHOLE_SIZE);
+        void *pMemory = priv::VkEnv::device.logical.mapMemory(memory, 0U, VK_WHOLE_SIZE);
         assert(pMemory);
 
         std::memcpy(pMemory, data, imageSize.w * imageSize.h * 4);
 
-        priv::VKInfo::device.unmapMemory(memory);
+        priv::VkEnv::device.logical.unmapMemory(memory);
 
         m_mapMutex.unlock();
     }
 }
 
-namespace iona {
+namespace iona 
+{
     void Texture::createImage(SizeUint size,
                          vk::Format format,
                          uint32_t levels,
@@ -44,45 +46,45 @@ namespace iona {
             vk::SharingMode::eExclusive
         );
 
-        m_image = priv::VKInfo::device.createImage(imageInfo);
+        m_image = priv::VkEnv::device.logical.createImage(imageInfo);
 
-        auto requirements = priv::VKInfo::device.getImageMemoryRequirements(m_image);
+        auto requirements = priv::VkEnv::device.logical.getImageMemoryRequirements(m_image);
 
-        auto typeIndex = priv::getMemoryType(priv::VKInfo::phyDevice, requirements.memoryTypeBits, vk::MemoryPropertyFlagBits::eDeviceLocal);
+        auto typeIndex = priv::getMemoryType(priv::VkEnv::device.physical, requirements.memoryTypeBits, vk::MemoryPropertyFlagBits::eDeviceLocal);
 
         auto memoryInfo = vk::MemoryAllocateInfo(
             requirements.size,
             typeIndex
         );
 
-        m_imageMemory = priv::VKInfo::device.allocateMemory(memoryInfo);
+        m_imageMemory = priv::VkEnv::device.logical.allocateMemory(memoryInfo);
 
-        priv::VKInfo::device.bindImageMemory(m_image, m_imageMemory, 0U);
+        priv::VkEnv::device.logical.bindImageMemory(m_image, m_imageMemory, 0U);
     }
 
     void Texture::createStagingBuffer(const vk::Image& image) {
-        auto requirements = priv::VKInfo::device.getImageMemoryRequirements(image);
+        auto requirements = priv::VkEnv::device.logical.getImageMemoryRequirements(image);
 
-        m_stagingBuffer = priv::VKInfo::device.createBuffer(vk::BufferCreateInfo(
+        m_stagingBuffer = priv::VkEnv::device.logical.createBuffer(vk::BufferCreateInfo(
             vk::BufferCreateFlags(),
             requirements.size,
             vk::BufferUsageFlagBits::eTransferSrc,
             vk::SharingMode::eExclusive
         ));
 
-        auto reqs = priv::VKInfo::device.getBufferMemoryRequirements(m_stagingBuffer);
+        auto reqs = priv::VkEnv::device.logical.getBufferMemoryRequirements(m_stagingBuffer);
 
-        m_stagingMemory = priv::VKInfo::device.allocateMemory(vk::MemoryAllocateInfo(
+        m_stagingMemory = priv::VkEnv::device.logical.allocateMemory(vk::MemoryAllocateInfo(
             reqs.size,
-            priv::getMemoryType(priv::VKInfo::phyDevice, reqs.memoryTypeBits, vk::MemoryPropertyFlagBits::eHostVisible)
+            priv::getMemoryType(priv::VkEnv::device.physical, reqs.memoryTypeBits, vk::MemoryPropertyFlagBits::eHostVisible)
         ));
 
-        priv::VKInfo::device.bindBufferMemory(m_stagingBuffer, m_stagingMemory, 0);
+        priv::VkEnv::device.logical.bindBufferMemory(m_stagingBuffer, m_stagingMemory, 0);
     }
 
     void Texture::createSamplers() 
     {
-        m_sampler = priv::VKInfo::device.createSampler(vk::SamplerCreateInfo(
+        m_sampler = priv::VkEnv::device.logical.createSampler(vk::SamplerCreateInfo(
             vk::SamplerCreateFlags(),
             vk::Filter::eNearest,
             vk::Filter::eNearest,
@@ -100,7 +102,7 @@ namespace iona {
 
     void Texture::createImageView() 
     {
-        m_imageView = priv::VKInfo::device.createImageView(vk::ImageViewCreateInfo(
+        m_imageView = priv::VkEnv::device.logical.createImageView(vk::ImageViewCreateInfo(
             vk::ImageViewCreateFlags(),
             m_image,
             vk::ImageViewType::e2D,
@@ -111,7 +113,7 @@ namespace iona {
                 vk::ComponentSwizzle::eIdentity,
                 vk::ComponentSwizzle::eIdentity
             ),
-            vk::ImageSubresourceRange(vk::ImageAspectFlagBits::eColor, 0, 1U, 0, 1U)
+            vk::ImageSubresourceRange(vk::ImageAspectFlagBits::eColor, 0U, 1U, 0U, 1U)
         ));
     }
 
@@ -119,19 +121,19 @@ namespace iona {
     {
         auto img = priv::ImageLoader::get().loadImage(path);
 
-        createImage(img.size, vk::Format::eR8G8B8A8Unorm, 1, 1);
+        createImage(img.size, vk::Format::eR8G8B8A8Unorm, 1U, 1U);
 
         createStagingBuffer(m_image);
 
-        priv::VKInfo::device.bindBufferMemory(m_stagingBuffer, m_stagingMemory, 0U);
+        priv::VkEnv::device.logical.bindBufferMemory(m_stagingBuffer, m_stagingMemory, 0U);
 
         priv::uploadContentToMemory(path, m_stagingMemory, img.size, img.pixels);
         priv::layout2layout(m_image, vk::Format::eR8G8B8A8Unorm, vk::ImageLayout::eUndefined, vk::ImageLayout::eTransferDstOptimal);
         priv::copyBufferToImage(m_stagingBuffer, m_image, img.size);
         priv::layout2layout(m_image, vk::Format::eR8G8B8A8Unorm, vk::ImageLayout::eTransferDstOptimal, vk::ImageLayout::eShaderReadOnlyOptimal);
 
-        priv::VKInfo::device.destroyBuffer(m_stagingBuffer);
-        priv::VKInfo::device.freeMemory(m_stagingMemory);
+        priv::VkEnv::device.logical.destroyBuffer(m_stagingBuffer);
+        priv::VkEnv::device.logical.freeMemory(m_stagingMemory);
 
         createImageView();
 
@@ -142,20 +144,20 @@ namespace iona {
 
     Texture::~Texture() 
     {
-        priv::VKInfo::device.destroyImageView(m_imageView);
-        priv::VKInfo::device.destroyImage(m_image);
-        priv::VKInfo::device.destroySampler(m_sampler);
-        priv::VKInfo::device.freeMemory(m_imageMemory);
+        priv::VkEnv::device.logical.destroyImageView(m_imageView);
+        priv::VkEnv::device.logical.destroyImage(m_image);
+        priv::VkEnv::device.logical.destroySampler(m_sampler);
+        priv::VkEnv::device.logical.freeMemory(m_imageMemory);
     }
 
     void Texture::bind() 
     {
         auto imginfo = vk::DescriptorImageInfo(m_sampler, m_imageView, vk::ImageLayout::eShaderReadOnlyOptimal);
 
-        auto descs = priv::VKInfo::device.allocateDescriptorSets(vk::DescriptorSetAllocateInfo(
-            priv::VKInfo::descPool,
-            Shader::current->descriptors().size(),
-            Shader::current->descriptors().data()
+        auto descs = priv::VkEnv::device.logical.allocateDescriptorSets(vk::DescriptorSetAllocateInfo(
+            priv::VkEnv::descriptors.pool,
+            Shader::current().getDescriptors().size(),
+            Shader::current().getDescriptors().data()
         ));
 
         auto wrDesc = vk::WriteDescriptorSet(
@@ -169,14 +171,12 @@ namespace iona {
             nullptr
         );
 
-        priv::VKInfo::device.updateDescriptorSets(wrDesc, nullptr);
+        priv::VkEnv::device.logical.updateDescriptorSets(wrDesc, nullptr);  
 
-        auto cb = priv::beginTempCommandBuffer();
+        auto& cb = priv::VkEnv::commands.currentBuffer;
         
-        cb.bindDescriptorSets(vk::PipelineBindPoint::eGraphics, Shader::current->layout(), 0, descs, nullptr);
-        
-        priv::endTempCommandBuffer(cb);
+        cb.bindDescriptorSets(vk::PipelineBindPoint::eGraphics, Shader::current().getLayout(), 0, descs, nullptr);
 
-        priv::VKInfo::device.freeDescriptorSets(priv::VKInfo::descPool, descs);
+        priv::VkEnv::device.logical.freeDescriptorSets(priv::VkEnv::descriptors.pool, descs);
     }
 }

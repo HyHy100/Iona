@@ -6,6 +6,7 @@ set(CMAKE_DEPENDS_LANGUAGES
 set(CMAKE_DEPENDS_CHECK_CXX
   "/home/hyreos/Documentos/git/my/Iona/iona.cpp" "/home/hyreos/Documentos/git/my/Iona/CMakeFiles/iona.dir/iona.cpp.o"
   "/home/hyreos/Documentos/git/my/Iona/src/Exception/Exception.cpp" "/home/hyreos/Documentos/git/my/Iona/CMakeFiles/iona.dir/src/Exception/Exception.cpp.o"
+  "/home/hyreos/Documentos/git/my/Iona/src/Exception/FileError.cpp" "/home/hyreos/Documentos/git/my/Iona/CMakeFiles/iona.dir/src/Exception/FileError.cpp.o"
   "/home/hyreos/Documentos/git/my/Iona/src/Generic/Iterator.cpp" "/home/hyreos/Documentos/git/my/Iona/CMakeFiles/iona.dir/src/Generic/Iterator.cpp.o"
   "/home/hyreos/Documentos/git/my/Iona/src/Graphics/ImageLoader.cpp" "/home/hyreos/Documentos/git/my/Iona/CMakeFiles/iona.dir/src/Graphics/ImageLoader.cpp.o"
   "/home/hyreos/Documentos/git/my/Iona/src/Graphics/VertexList.cpp" "/home/hyreos/Documentos/git/my/Iona/CMakeFiles/iona.dir/src/Graphics/VertexList.cpp.o"
@@ -15,8 +16,9 @@ set(CMAKE_DEPENDS_CHECK_CXX
   "/home/hyreos/Documentos/git/my/Iona/src/Graphics/Vulkan/Helpers/Transfer.cpp" "/home/hyreos/Documentos/git/my/Iona/CMakeFiles/iona.dir/src/Graphics/Vulkan/Helpers/Transfer.cpp.o"
   "/home/hyreos/Documentos/git/my/Iona/src/Graphics/Vulkan/Image.cpp" "/home/hyreos/Documentos/git/my/Iona/CMakeFiles/iona.dir/src/Graphics/Vulkan/Image.cpp.o"
   "/home/hyreos/Documentos/git/my/Iona/src/Graphics/Vulkan/Pipeline.cpp" "/home/hyreos/Documentos/git/my/Iona/CMakeFiles/iona.dir/src/Graphics/Vulkan/Pipeline.cpp.o"
-  "/home/hyreos/Documentos/git/my/Iona/src/Graphics/Vulkan/RNInit.cpp" "/home/hyreos/Documentos/git/my/Iona/CMakeFiles/iona.dir/src/Graphics/Vulkan/RNInit.cpp.o"
   "/home/hyreos/Documentos/git/my/Iona/src/Graphics/Vulkan/VertexBuffer.cpp" "/home/hyreos/Documentos/git/my/Iona/CMakeFiles/iona.dir/src/Graphics/Vulkan/VertexBuffer.cpp.o"
+  "/home/hyreos/Documentos/git/my/Iona/src/Graphics/Vulkan/VkLoader.cpp" "/home/hyreos/Documentos/git/my/Iona/CMakeFiles/iona.dir/src/Graphics/Vulkan/VkLoader.cpp.o"
+  "/home/hyreos/Documentos/git/my/Iona/src/Log/Logger.cpp" "/home/hyreos/Documentos/git/my/Iona/CMakeFiles/iona.dir/src/Log/Logger.cpp.o"
   "/home/hyreos/Documentos/git/my/Iona/src/Window/Window.cpp" "/home/hyreos/Documentos/git/my/Iona/CMakeFiles/iona.dir/src/Window/Window.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")

@@ -177,6 +177,33 @@ src/Exception/Exception.cpp.s:
 	$(MAKE) -f CMakeFiles/iona.dir/build.make CMakeFiles/iona.dir/src/Exception/Exception.cpp.s
 .PHONY : src/Exception/Exception.cpp.s
 
+src/Exception/FileError.o: src/Exception/FileError.cpp.o
+
+.PHONY : src/Exception/FileError.o
+
+# target to build an object file
+src/Exception/FileError.cpp.o:
+	$(MAKE) -f CMakeFiles/iona.dir/build.make CMakeFiles/iona.dir/src/Exception/FileError.cpp.o
+.PHONY : src/Exception/FileError.cpp.o
+
+src/Exception/FileError.i: src/Exception/FileError.cpp.i
+
+.PHONY : src/Exception/FileError.i
+
+# target to preprocess a source file
+src/Exception/FileError.cpp.i:
+	$(MAKE) -f CMakeFiles/iona.dir/build.make CMakeFiles/iona.dir/src/Exception/FileError.cpp.i
+.PHONY : src/Exception/FileError.cpp.i
+
+src/Exception/FileError.s: src/Exception/FileError.cpp.s
+
+.PHONY : src/Exception/FileError.s
+
+# target to generate assembly for a file
+src/Exception/FileError.cpp.s:
+	$(MAKE) -f CMakeFiles/iona.dir/build.make CMakeFiles/iona.dir/src/Exception/FileError.cpp.s
+.PHONY : src/Exception/FileError.cpp.s
+
 src/Generic/Iterator.o: src/Generic/Iterator.cpp.o
 
 .PHONY : src/Generic/Iterator.o
@@ -420,33 +447,6 @@ src/Graphics/Vulkan/Pipeline.cpp.s:
 	$(MAKE) -f CMakeFiles/iona.dir/build.make CMakeFiles/iona.dir/src/Graphics/Vulkan/Pipeline.cpp.s
 .PHONY : src/Graphics/Vulkan/Pipeline.cpp.s
 
-src/Graphics/Vulkan/RNInit.o: src/Graphics/Vulkan/RNInit.cpp.o
-
-.PHONY : src/Graphics/Vulkan/RNInit.o
-
-# target to build an object file
-src/Graphics/Vulkan/RNInit.cpp.o:
-	$(MAKE) -f CMakeFiles/iona.dir/build.make CMakeFiles/iona.dir/src/Graphics/Vulkan/RNInit.cpp.o
-.PHONY : src/Graphics/Vulkan/RNInit.cpp.o
-
-src/Graphics/Vulkan/RNInit.i: src/Graphics/Vulkan/RNInit.cpp.i
-
-.PHONY : src/Graphics/Vulkan/RNInit.i
-
-# target to preprocess a source file
-src/Graphics/Vulkan/RNInit.cpp.i:
-	$(MAKE) -f CMakeFiles/iona.dir/build.make CMakeFiles/iona.dir/src/Graphics/Vulkan/RNInit.cpp.i
-.PHONY : src/Graphics/Vulkan/RNInit.cpp.i
-
-src/Graphics/Vulkan/RNInit.s: src/Graphics/Vulkan/RNInit.cpp.s
-
-.PHONY : src/Graphics/Vulkan/RNInit.s
-
-# target to generate assembly for a file
-src/Graphics/Vulkan/RNInit.cpp.s:
-	$(MAKE) -f CMakeFiles/iona.dir/build.make CMakeFiles/iona.dir/src/Graphics/Vulkan/RNInit.cpp.s
-.PHONY : src/Graphics/Vulkan/RNInit.cpp.s
-
 src/Graphics/Vulkan/VertexBuffer.o: src/Graphics/Vulkan/VertexBuffer.cpp.o
 
 .PHONY : src/Graphics/Vulkan/VertexBuffer.o
@@ -473,6 +473,60 @@ src/Graphics/Vulkan/VertexBuffer.s: src/Graphics/Vulkan/VertexBuffer.cpp.s
 src/Graphics/Vulkan/VertexBuffer.cpp.s:
 	$(MAKE) -f CMakeFiles/iona.dir/build.make CMakeFiles/iona.dir/src/Graphics/Vulkan/VertexBuffer.cpp.s
 .PHONY : src/Graphics/Vulkan/VertexBuffer.cpp.s
+
+src/Graphics/Vulkan/VkLoader.o: src/Graphics/Vulkan/VkLoader.cpp.o
+
+.PHONY : src/Graphics/Vulkan/VkLoader.o
+
+# target to build an object file
+src/Graphics/Vulkan/VkLoader.cpp.o:
+	$(MAKE) -f CMakeFiles/iona.dir/build.make CMakeFiles/iona.dir/src/Graphics/Vulkan/VkLoader.cpp.o
+.PHONY : src/Graphics/Vulkan/VkLoader.cpp.o
+
+src/Graphics/Vulkan/VkLoader.i: src/Graphics/Vulkan/VkLoader.cpp.i
+
+.PHONY : src/Graphics/Vulkan/VkLoader.i
+
+# target to preprocess a source file
+src/Graphics/Vulkan/VkLoader.cpp.i:
+	$(MAKE) -f CMakeFiles/iona.dir/build.make CMakeFiles/iona.dir/src/Graphics/Vulkan/VkLoader.cpp.i
+.PHONY : src/Graphics/Vulkan/VkLoader.cpp.i
+
+src/Graphics/Vulkan/VkLoader.s: src/Graphics/Vulkan/VkLoader.cpp.s
+
+.PHONY : src/Graphics/Vulkan/VkLoader.s
+
+# target to generate assembly for a file
+src/Graphics/Vulkan/VkLoader.cpp.s:
+	$(MAKE) -f CMakeFiles/iona.dir/build.make CMakeFiles/iona.dir/src/Graphics/Vulkan/VkLoader.cpp.s
+.PHONY : src/Graphics/Vulkan/VkLoader.cpp.s
+
+src/Log/Logger.o: src/Log/Logger.cpp.o
+
+.PHONY : src/Log/Logger.o
+
+# target to build an object file
+src/Log/Logger.cpp.o:
+	$(MAKE) -f CMakeFiles/iona.dir/build.make CMakeFiles/iona.dir/src/Log/Logger.cpp.o
+.PHONY : src/Log/Logger.cpp.o
+
+src/Log/Logger.i: src/Log/Logger.cpp.i
+
+.PHONY : src/Log/Logger.i
+
+# target to preprocess a source file
+src/Log/Logger.cpp.i:
+	$(MAKE) -f CMakeFiles/iona.dir/build.make CMakeFiles/iona.dir/src/Log/Logger.cpp.i
+.PHONY : src/Log/Logger.cpp.i
+
+src/Log/Logger.s: src/Log/Logger.cpp.s
+
+.PHONY : src/Log/Logger.s
+
+# target to generate assembly for a file
+src/Log/Logger.cpp.s:
+	$(MAKE) -f CMakeFiles/iona.dir/build.make CMakeFiles/iona.dir/src/Log/Logger.cpp.s
+.PHONY : src/Log/Logger.cpp.s
 
 src/Window/Window.o: src/Window/Window.cpp.o
 
@@ -516,6 +570,9 @@ help:
 	@echo "... src/Exception/Exception.o"
 	@echo "... src/Exception/Exception.i"
 	@echo "... src/Exception/Exception.s"
+	@echo "... src/Exception/FileError.o"
+	@echo "... src/Exception/FileError.i"
+	@echo "... src/Exception/FileError.s"
 	@echo "... src/Generic/Iterator.o"
 	@echo "... src/Generic/Iterator.i"
 	@echo "... src/Generic/Iterator.s"
@@ -543,12 +600,15 @@ help:
 	@echo "... src/Graphics/Vulkan/Pipeline.o"
 	@echo "... src/Graphics/Vulkan/Pipeline.i"
 	@echo "... src/Graphics/Vulkan/Pipeline.s"
-	@echo "... src/Graphics/Vulkan/RNInit.o"
-	@echo "... src/Graphics/Vulkan/RNInit.i"
-	@echo "... src/Graphics/Vulkan/RNInit.s"
 	@echo "... src/Graphics/Vulkan/VertexBuffer.o"
 	@echo "... src/Graphics/Vulkan/VertexBuffer.i"
 	@echo "... src/Graphics/Vulkan/VertexBuffer.s"
+	@echo "... src/Graphics/Vulkan/VkLoader.o"
+	@echo "... src/Graphics/Vulkan/VkLoader.i"
+	@echo "... src/Graphics/Vulkan/VkLoader.s"
+	@echo "... src/Log/Logger.o"
+	@echo "... src/Log/Logger.i"
+	@echo "... src/Log/Logger.s"
 	@echo "... src/Window/Window.o"
 	@echo "... src/Window/Window.i"
 	@echo "... src/Window/Window.s"

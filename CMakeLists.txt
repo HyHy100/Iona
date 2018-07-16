@@ -6,7 +6,7 @@ set(LIBRARY_OUTPUT_PATH ${CMAKE_SOURCE_DIR}/bin)
 set(CMAKE_BINARY_DIR ${CMAKE_SOURCE_DIR}/bin)
 set(EXECUTABLE_OUTPUT_PATH ${CMAKE_SOURCE_DIR}/bin)
 
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++1z")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++17")
 
 file(GLOB FSRC
     "src/Window/*.cpp"
@@ -14,6 +14,7 @@ file(GLOB FSRC
     "src/Graphics/*.cpp"
     "src/Exception/*.cpp"
     "src/Generic/*.cpp"
+    "src/Log/*.cpp"
     "src/Graphics/Vulkan/Helpers/*.cpp"
     "*.cpp"
 )

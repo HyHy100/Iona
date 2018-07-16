@@ -9,9 +9,12 @@
 #include <iterator>
 #include <array>
 #include <algorithm>
+#include <iostream>
 
-namespace iona {
-    class Shader {
+namespace iona 
+{
+    class Shader
+    {
     public:
         Shader() = default;
 
@@ -21,29 +24,36 @@ namespace iona {
 
         void bind();
 
-        static inline Shader* current = nullptr;
+        static Shader& current()
+        {
+            if (!m_current)
+            {
+                std::cerr << "Shader::current: Current shader pointer is null." << std::endl;
+            }
+
+            return *m_current;
+        }
     private:
         friend class Texture;
 
-        inline vk::Pipeline& pipeline() noexcept 
+        inline vk::Pipeline& getPipeline() noexcept 
         {
-            return m_pipeline;
+            static vk::Pipeline vpipeline;
+            return vpipeline;
         }
 
-        inline vk::PipelineLayout& layout() noexcept 
+        inline vk::PipelineLayout& getLayout() noexcept 
         {
-            return m_layout;
+            static vk::PipelineLayout vlayout;
+            return vlayout;
         }
 
-        inline std::array<vk::DescriptorSetLayout, 1>& descriptors() noexcept
+        inline std::array<vk::DescriptorSetLayout, 1>& getDescriptors() noexcept
         {
-            return dl;
+            static std::array<vk::DescriptorSetLayout, 1> vdescriptors;
+            return vdescriptors;
         }
 
-        std::array<vk::DescriptorSetLayout, 1> dl;
-
-        vk::Pipeline m_pipeline;
-
-        vk::PipelineLayout m_layout;
+        static inline Shader* m_current{ nullptr };
     };
 }

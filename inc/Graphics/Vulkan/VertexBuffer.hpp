@@ -23,19 +23,19 @@ namespace iona
         {
             if (m_buffer) 
             {
-                priv::VKInfo::device.destroyBuffer(m_buffer);
+                priv::VkEnv::device.logical.destroyBuffer(m_buffer);
             }
 
             if (m_memory)
             {
-                priv::VKInfo::device.freeMemory(m_memory);
+                priv::VkEnv::device.logical.freeMemory(m_memory);
             }
 
             const std::size_t memLen = vlist.size() * sizeof(Vertex);
 
             static std::mutex mutex;
             
-            vk::Buffer stagingBuffer = priv::VKInfo::device.createBuffer(
+            vk::Buffer stagingBuffer = priv::VkEnv::device.logical.createBuffer(
                 vk::BufferCreateInfo(
                     vk::BufferCreateFlags(),
                     memLen,
@@ -44,21 +44,21 @@ namespace iona
                 )
             );
 
-            auto requirements = priv::VKInfo::device.getBufferMemoryRequirements(stagingBuffer);
+            auto requirements = priv::VkEnv::device.logical.getBufferMemoryRequirements(stagingBuffer);
 
             const vk::DeviceMemory stagingMemory = priv::getDeviceOpMemory(requirements.size);
 
-            priv::VKInfo::device.bindBufferMemory(stagingBuffer, stagingMemory, 0U);
+            priv::VkEnv::device.logical.bindBufferMemory(stagingBuffer, stagingMemory, 0U);
 
             mutex.lock();
 
-            Vertex* const data = reinterpret_cast<Vertex*>(priv::VKInfo::device.mapMemory(stagingMemory, 0U, requirements.size));
+            Vertex* const data = reinterpret_cast<Vertex*>(priv::VkEnv::device.logical.mapMemory(stagingMemory, 0U, requirements.size));
 
             std::memcpy(data, vlist.data(), memLen);
 
-            priv::VKInfo::device.unmapMemory(stagingMemory);
+            priv::VkEnv::device.logical.unmapMemory(stagingMemory);
 
-            priv::VKInfo::device.flushMappedMemoryRanges(
+            priv::VkEnv::device.logical.flushMappedMemoryRanges(
                 vk::MappedMemoryRange(
                     stagingMemory, 
                     0U, 
@@ -66,7 +66,7 @@ namespace iona
                 )
             );
 
-            priv::VKInfo::device.invalidateMappedMemoryRanges(
+            priv::VkEnv::device.logical.invalidateMappedMemoryRanges(
                 vk::MappedMemoryRange(
                     stagingMemory, 
                     0U, 
@@ -76,7 +76,7 @@ namespace iona
 
             mutex.unlock();
 
-            m_buffer = priv::VKInfo::device.createBuffer(
+            m_buffer = priv::VkEnv::device.logical.createBuffer(
                 vk::BufferCreateInfo(
                     vk::BufferCreateFlags(),
                     memLen,
@@ -85,23 +85,24 @@ namespace iona
                 )
             );
 
-            auto reqs = priv::VKInfo::device.getBufferMemoryRequirements(m_buffer);
+            auto reqs = priv::VkEnv::device.logical.getBufferMemoryRequirements(m_buffer);
 
-            m_memory = priv::VKInfo::device.allocateMemory(
+            m_memory = priv::VkEnv::device.logical.allocateMemory(
                 vk::MemoryAllocateInfo(
                     reqs.size,
-                    priv::getMemoryType(priv::VKInfo::phyDevice, reqs.memoryTypeBits, vk::MemoryPropertyFlagBits::eDeviceLocal)
+                    priv::getMemoryType(priv::VkEnv::device.physical, reqs.memoryTypeBits, vk::MemoryPropertyFlagBits::eDeviceLocal)
                 )
             );
 
-            priv::VKInfo::device.bindBufferMemory(m_buffer, m_memory, 0U);
+            priv::VkEnv::device.logical.bindBufferMemory(m_buffer, m_memory, 0U);
 
             priv::copyBufferToBuffer(stagingBuffer, m_buffer, memLen);
 
-            priv::VKInfo::device.destroyBuffer(stagingBuffer);
+            priv::VkEnv::device.logical.destroyBuffer(stagingBuffer);
         }
 
-        inline vk::Buffer getBuffer() const noexcept {
+        inline vk::Buffer getBuffer() const noexcept 
+        {
             return m_buffer;
         }
 
